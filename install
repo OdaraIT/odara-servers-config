@@ -5,66 +5,96 @@ check_package() {
 }
 
 MISSING_PACKAGES=""
-check_package "nvim"
 check_package "jq"
 check_package "stow"
 
 if [ "$EUID" -eq 0 ] && [ -n "${MISSING_PACKAGES}" ]; then
-  echo "Os seguintes pacotes não estão instalados: ${MISSING_PACKAGES}"
+  echo "The following packages are missing: ${MISSING_PACKAGES}"
 
-  if ! grep -q "neovim-ppa/stable" /etc/apt/sources.list /etc/apt/sources.list.d/* 2>/dev/null; then
-    echo "Adicionando PPA do Neovim..."
-
-    sudo add-apt-repository -y ppa:neovim-ppa/stable
-  fi
-
-  echo "Atualizando e instalando pacotes..."
-
+  echo "Updating and installing missing packages..."
   sudo apt update && sudo apt install -y "${MISSING_PACKAGES}"
 fi
 
+if snap list nvim &>/dev/null; then
+  if [ "$EUID" -eq 0 ]; then
+    echo "Neovim is already installed. Refreshing..."
+    sudo snap refresh nvim
+  else
+    echo "Neovim is already installed but requires root privileges to refresh."
+  fi
+else
+  if [ "$EUID" -eq 0 ]; then
+    echo "Installing Neovim via Snap..."
+    sudo snap install --classic nvim
+  else
+    echo "Neovim is not installed but requires root privileges to install."
+  fi
+fi
+
 NERD_FONT_DIR="$HOME/.local/share/fonts"
-echo "Baixando e instalando Nerd Fonts..."
+FONT_CHECK_FILE="$NERD_FONT_DIR/.nerd_fonts_installed"
+
+echo "Downloading and installing Nerd Fonts..."
+
 mkdir -p "$NERD_FONT_DIR"
 
 FIRA_FONT_URL="https://github.com/ryanoasis/nerd-fonts/releases/latest/download/FiraCode.zip"
-wget -O "$NERD_FONT_DIR/FiraCode.zip" "$FIRA_FONT_URL"
-unzip -o "$NERD_FONT_DIR/FiraCode.zip" -d "$NERD_FONT_DIR"
-
 JETBRAINS_FONT_URL="https://github.com/ryanoasis/nerd-fonts/releases/latest/download/JetBrainsMono.zip"
-wget -O "$NERD_FONT_DIR/JetBrainsMono.zip" "$JETBRAINS_FONT_URL"
-unzip -o "$NERD_FONT_DIR/JetBrainsMono.zip" -d "$NERD_FONT_DIR"
+
+if [ -f "$FONT_CHECK_FILE" ]; then
+  echo "Checking Nerd Fonts integrity..."
+
+  if md5sum -c "$FONT_CHECK_FILE" --quiet; then
+    echo "Nerd Fonts are already installed and up-to-date."
+  else
+    echo "Updating Nerd Fonts..."
+
+    wget -O "$NERD_FONT_DIR/FiraCode.zip" "$FIRA_FONT_URL"
+    unzip -o "$NERD_FONT_DIR/FiraCode.zip" -d "$NERD_FONT_DIR"
+    wget -O "$NERD_FONT_DIR/JetBrainsMono.zip" "$JETBRAINS_FONT_URL"
+    unzip -o "$NERD_FONT_DIR/JetBrainsMono.zip" -d "$NERD_FONT_DIR"
+    find "$NERD_FONT_DIR" -type f -exec md5sum {} \; >"$FONT_CHECK_FILE"
+  fi
+else
+  echo "Installing Nerd Fonts for the first time..."
+
+  wget -O "$NERD_FONT_DIR/FiraCode.zip" "$FIRA_FONT_URL"
+  unzip -o "$NERD_FONT_DIR/FiraCode.zip" -d "$NERD_FONT_DIR"
+  wget -O "$NERD_FONT_DIR/JetBrainsMono.zip" "$JETBRAINS_FONT_URL"
+  unzip -o "$NERD_FONT_DIR/JetBrainsMono.zip" -d "$NERD_FONT_DIR"
+  find "$NERD_FONT_DIR" -type f -exec md5sum {} \; >"$FONT_CHECK_FILE"
+fi
 
 fc-cache -fv
 
 if [ -d "$HOME/.SpaceVim" ]; then
-  echo "Removendo SpaceVim..."
+  echo "Removing SpaceVim..."
+
   curl -sLf https://spacevim.org/install.sh | bash -s -- --uninstall
+
   rm -rf "$HOME/.SpaceVim"
 fi
 
-echo "Removendo configurações antigas..."
+echo "Removing old configurations..."
 
 rm -rf "$HOME/.vim" "$HOME/.vimrc" "$HOME/.config/nvim" "$HOME/.bashrc" "$HOME/.bash_profile"
 
-echo "Configurando repositório Odara..."
+echo "Configuring Odara repository..."
 
 if [ -d "$HOME/.odara" ]; then
-  echo "Removendo repositório Odara existente..."
-
+  echo "Removing existing Odara repository..."
   rm -rf "$HOME/.odara"
 fi
 
 git clone https://github.com/OdaraIT/servers.git "$HOME/.odara"
 
-# Navegar até o diretório .odara e rodar stow
-echo "Aplicando stow no repositório Odara..."
+echo "Applying stow to Odara repository..."
 
 cd "${HOME}/.odara" || exit
 
 stow bash
 stow nvim
 
-echo "Instalação concluída!"
+echo "Installation completed!"
 
 cd "${HOME}" || exit
