@@ -5,8 +5,14 @@ check_package() {
 }
 
 MISSING_PACKAGES=""
+
+check_package "git"
+check_package "curl"
 check_package "jq"
 check_package "stow"
+check_package "ripgrep"
+check_package "perl"
+check_package "ruby-full"
 
 if [ "$EUID" -eq 0 ] && [ -n "${MISSING_PACKAGES}" ]; then
   echo "The following packages are missing: ${MISSING_PACKAGES}"
@@ -15,19 +21,32 @@ if [ "$EUID" -eq 0 ] && [ -n "${MISSING_PACKAGES}" ]; then
   sudo apt update && sudo apt install -y "${MISSING_PACKAGES}"
 fi
 
-if snap list nvim &>/dev/null; then
-  if [ "$EUID" -eq 0 ]; then
-    echo "Neovim is already installed. Refreshing..."
-    sudo snap refresh nvim
+if [ "$EUID" -eq 0 ]; then
+  echo "Installing Neovim globally"
+
+  NVIM_URL="https://github.com/neovim/neovim/releases/latest/download/nvim-linux-x86_64.tar.gz"
+  NVIM_DEST="/opt/nvim"
+  NVIM_TAR="nvim-linux-x86_64.tar.gz"
+  NVIM_TMP="/opt/nvim-linux-x86_64"
+
+  curl -LO "${NVIM_URL}"
+  sudo rm -rf "${NVIM_DEST}"
+  sudo tar -C /opt -xzf "${NVIM_TAR}"
+  sudo mv "${NVIM_TMP}" "${NVIM_DEST}"
+
+  /opt/nvim/bin/nvim --version
+
+  ENV_FILE="/etc/environment"
+  NVIM_PATH="/opt/nvim/bin"
+
+  if grep -qE "^PATH=.*${NVIM_PATH}" "${ENV_FILE}"; then
+    echo "O caminho ${NVIM_PATH} já está na variável PATH."
   else
-    echo "Neovim is already installed but requires root privileges to refresh."
-  fi
-else
-  if [ "$EUID" -eq 0 ]; then
-    echo "Installing Neovim via Snap..."
-    sudo snap install --classic nvim
-  else
-    echo "Neovim is not installed but requires root privileges to install."
+    echo "Adicionando ${NVIM_PATH} à variável PATH..."
+
+    sudo sed -i "/^PATH=/ s|\"$|:${NVIM_PATH}\"|" "${ENV_FILE}"
+
+    echo "Atualização concluída. Verifique com: cat ${ENV_FILE}"
   fi
 fi
 
