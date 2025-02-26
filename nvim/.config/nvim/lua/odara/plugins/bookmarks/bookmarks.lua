@@ -6,7 +6,7 @@ return {
   --   Repositório: https://github.com/crusj/bookmarks.nvim
   'crusj/bookmarks.nvim',
 
-  enabled = false,
+  enabled = vim.g.odara.plugins.bookmarks_nvim,
 
   dependencies = {
     -- NOTE:  Ícones para arquivos e diretórios no Neovim.

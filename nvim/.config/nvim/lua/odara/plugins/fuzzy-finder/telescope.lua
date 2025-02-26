@@ -10,7 +10,7 @@ return {
 
   branch = '0.1.x',
 
-  enabled = vim.g.odara.plugins.telescope_nvim or false,
+  enabled = vim.g.odara.plugins.telescope_nvim and vim.g.odara.plugins.plenary_nvim,
 
   dependencies = {
     -- NOTE:  Biblioteca auxiliar com funções utilitárias para desenvolvimento em Lua no Neovim.
@@ -118,9 +118,9 @@ return {
 
       pickers = {
         find_files = {
-          hidden = vim.g.odara.telescope.pickers.find_files.hidden or false,
-          no_ignore = vim.g.odara.telescope.pickers.find_files.no_ignore or false,
-          no_ignore_parent = vim.g.odara.telescope.pickers.find_files.no_ignore_parent or false,
+          hidden = vim.g.odara.show_ignored_files,
+          -- no_ignore = vim.g.odara.telescope.pickers.find_files.no_ignore or false,
+          -- no_ignore_parent = vim.g.odara.telescope.pickers.find_files.no_ignore_parent or false,
         },
       },
 

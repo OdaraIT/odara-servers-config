@@ -1,6 +1,3 @@
-require('odara.core.settings')
-require('odara.core.servers-settings')
-require('odara.core.files-types')
-require('odara.core.projects')
+require('odara.core.files')
 require('odara.core.options')
 require('odara.core.keymaps')

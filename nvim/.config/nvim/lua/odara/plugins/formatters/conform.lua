@@ -59,10 +59,6 @@ return {
 
       format_on_save = function(bufnr)
         conform.format(vim.tbl_extend('force', { bufnr = bufnr }, format_opts))
-
-        -- if vim.bo[bufnr].filetype == 'php' then
-        --   require('odara.core.helpers.formatters-php-fix-indent').fix_php_indent(bufnr)
-        -- end
       end,
     })
 

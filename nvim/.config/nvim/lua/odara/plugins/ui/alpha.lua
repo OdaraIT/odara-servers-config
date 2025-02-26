@@ -49,7 +49,7 @@ return {
 
     dashboard.section.buttons.val = {
       dashboard.button('e', '  > New File', '<cmd>ene<CR>'),
-      dashboard.button('SPC ee', '  > Toggle File [E]xplor[e]r', ':lua Snacks.explorer()<CR>'),
+      dashboard.button('SPC ee', '  > Toggle File [E]xplor[e]r', '<cmd>NvimTreeToggle<CR>'),
       dashboard.button('SPC sf', '󰱼  > [S]earch [F]iles', '<cmd>Telescope find_files<cr>'),
       dashboard.button('SPC sg', '  > [S]earch by [G]rep', '<cmd>Telescope live_grep<cr>'),
       -- dashboard.button('SPC wr', '󰁯  > Restore Session For Current Directory', '<cmd>SessionRestore<CR>'),
