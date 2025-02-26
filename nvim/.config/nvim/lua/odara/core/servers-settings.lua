@@ -1,11 +1,9 @@
-local plugins = vim.g.odara.plugins
-
-plugins.bookmarks_nvim = false
-plugins.vim_suda = false
-plugins.rest_nvim = false
-plugins.nvim_neoclip_lua = false
-plugins.nvim_dap = false
-plugins.nvim_dap_go = false
-plugins.nvim_lint = false
-plugins.nvim_lspconfig = false
-plugins.auto_session = false
+vim.g.odara.plugins.bookmarks_nvim = false
+vim.g.odara.plugins.vim_suda = false
+vim.g.odara.plugins.rest_nvim = false
+vim.g.odara.plugins.nvim_neoclip_lua = false
+vim.g.odara.plugins.nvim_dap = false
+vim.g.odara.plugins.nvim_dap_go = false
+vim.g.odara.plugins.nvim_lint = false
+vim.g.odara.plugins.nvim_lspconfig = false
+vim.g.odara.plugins.auto_session = false
