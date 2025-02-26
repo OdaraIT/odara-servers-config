@@ -3,6 +3,9 @@ return {
     show_hidden_files = true,
     show_git_ignored_files = true,
     show_git_ignored_parent_files = false,
+    python_path = '/usr/bin/python3',
+    skip_lsp = false,
+    skip_none_ls = false,
   },
   plugins = {
     bookmarks_nvim = false,

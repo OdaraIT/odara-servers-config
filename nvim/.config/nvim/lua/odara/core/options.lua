@@ -112,4 +112,4 @@ vim.o.foldenable = true
 vim.o.foldmethod = 'marker'
 
 -- Python
-vim.g.python3_host_prog = '/home/linuxbrew/.linuxbrew/bin/python3'
+vim.g.python3_host_prog = vim.g.odara.global.python_path

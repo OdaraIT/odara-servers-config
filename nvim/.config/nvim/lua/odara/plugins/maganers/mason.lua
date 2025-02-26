@@ -5,7 +5,9 @@ return {
   --  Repositório: https://github.com/williamboman/mason.nvim
   'williamboman/mason.nvim',
 
-  enabled = vim.g.odara.plugins.mason_nvim or false,
+  enabled = vim.g.odara.plugins.mason_nvim
+    and vim.g.odara.plugins.nvim_lspconfig
+    and vim.g.odara.plugins.mason_lspconfig_nvim,
 
   dependencies = {
     -- NOTE:  Coleção de configurações prontas para servidores LSP no Neovim.
@@ -53,19 +55,18 @@ return {
     --   Repositório: https://github.com/jay-babu/mason-nvim-dap.nvim
     {
       'jay-babu/mason-nvim-dap.nvim',
-      enabled = true,
+      enabled = vim.g.odara.plugins.nvim_dap,
     },
   },
 
   config = function()
     local mason = require('mason')
-    local mason_lspconfig = require('mason-lspconfig')
-    local mason_null_ls = require('mason-null-ls')
-    local mason_dap = require('mason-nvim-dap')
 
     mason.setup()
 
     -- Language Servers (LSP) {{{
+
+    local mason_lspconfig = require('mason-lspconfig')
 
     local lsp = {
       'lua_ls',
@@ -80,6 +81,10 @@ return {
       'intelephense',
     }
 
+    if vim.g.odara.global.skip_lsp then
+      lsp = {}
+    end
+
     mason_lspconfig.setup({
       ensure_installed = lsp,
       automatic_installation = true,
@@ -88,6 +93,8 @@ return {
     -- }}}
 
     -- Formatters & Linters {{{
+
+    local mason_null_ls = require('mason-null-ls')
 
     local formatters = {
       -- Linters
@@ -110,6 +117,10 @@ return {
       'jq',
     }
 
+    if vim.g.odara.global.skip_none_ls then
+      formatters = {}
+    end
+
     mason_null_ls.setup({
       ensure_installed = formatters,
       automatic_installation = true,
@@ -119,15 +130,18 @@ return {
 
     -- DAP {{{
 
-    local dap = {
-      'php',
-      'delve',
-    }
+    if vim.g.odara.plugins.nvim_dap then
+      local mason_dap = require('mason-nvim-dap')
+      local dap = {
+        'php',
+        'delve',
+      }
 
-    mason_dap.setup({
-      ensure_installed = dap,
-      automatic_installation = true,
-    })
+      mason_dap.setup({
+        ensure_installed = dap,
+        automatic_installation = true,
+      })
+    end
 
     -- }}}
   end,
