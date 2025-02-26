@@ -33,6 +33,7 @@ if [ "$EUID" -eq 0 ]; then
   sudo rm -rf "${NVIM_DEST}"
   sudo tar -C /opt -xzf "${NVIM_TAR}"
   sudo mv "${NVIM_TMP}" "${NVIM_DEST}"
+  sudo rm -rf "${NVIM_TAR}"
 
   /opt/nvim/bin/nvim --version
 
