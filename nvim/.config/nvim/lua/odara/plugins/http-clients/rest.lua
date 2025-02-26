@@ -6,7 +6,7 @@ return {
   --  Repositório: https://github.com/rest-nvim/rest.nvim
   'rest-nvim/rest.nvim',
 
-  enabled = vim.g.odara.plugins.rest_nvim or false,
+  enabled = vim.g.odara.plugins.rest_nvim and vim.g.odara.plugins.plenary_nvim,
 
   dependencies = {
     -- NOTE:  Biblioteca auxiliar com funções utilitárias para desenvolvimento em Lua no Neovim.

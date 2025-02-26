@@ -1,9 +1,11 @@
-vim.g.odara.plugins.bookmarks_nvim = false
-vim.g.odara.plugins.vim_suda = false
-vim.g.odara.plugins.rest_nvim = false
-vim.g.odara.plugins.nvim_neoclip_lua = false
-vim.g.odara.plugins.nvim_dap = false
-vim.g.odara.plugins.nvim_dap_go = false
-vim.g.odara.plugins.nvim_lint = false
-vim.g.odara.plugins.nvim_lspconfig = false
-vim.g.odara.plugins.auto_session = false
+vim.g.odara.plugins = vim.tbl_extend('force', vim.g.odara.plugins, {
+  bookmarks_nvim = false,
+  vim_suda = false,
+  rest_nvim = false,
+  nvim_neoclip_lua = false,
+  nvim_dap = false,
+  nvim_dap_go = false,
+  nvim_lint = false,
+  nvim_lspconfig = false,
+  auto_session = false,
+})
