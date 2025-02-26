@@ -72,17 +72,44 @@ if [ -d "$HOME/.SpaceVim" ]; then
 
   curl -sLf https://spacevim.org/install.sh | bash -s -- --uninstall
 
-  rm -rf "$HOME/.SpaceVim"
+  rm -rf "${HOME}/.SpaceVim" "${HOME}/.SpaceVim.d"
+
+  if [ -L "${HOME}/.nvim" ]; then
+    unlink "${HOME}/.nvim"
+  fi
+
+  if [ -L "${HOME}/.vim" ]; then
+    unlink "${HOME}/.vim"
+  fi
 fi
 
 echo "Removing old configurations..."
 
-rm -rf "$HOME/.vim" "$HOME/.vimrc" "$HOME/.config/nvim" "$HOME/.bashrc" "$HOME/.bash_profile"
+FILES=(
+  "${HOME}/.bashrc"
+  "${HOME}/.bash_aliases"
+  "${HOME}/.bash_custom"
+  "${HOME}/.bash_logout"
+  "${HOME}/.bash_ps1"
+  "${HOME}/.config/nvim"
+  "${HOME}/.config/vim"
+  "${HOME}/.vim"
+  "${HOME}/.vimrc"
+)
+
+for FILE in "${FILES[@]}"; do
+  if [ -L "${FILE}" ]; then
+    unlink "${FILE}"
+  elif [ -d "${FILE}" ] || [ -f "${FILE}" ]; then
+    rm -rf "${FILE}"
+  fi
+done
 
 echo "Configuring Odara repository..."
 
 if [ -d "$HOME/.odara" ]; then
   echo "Removing existing Odara repository..."
+
   rm -rf "$HOME/.odara"
 fi
 
