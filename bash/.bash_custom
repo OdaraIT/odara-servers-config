@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+
+export VISUAL='nvim'
+export EDITOR='nvim'
+export GIT_EDITOR='nvim'
+
+if [ -f .projectrc ]; then
+  source .projectrc
+fi
+
+last_dir="$PWD"
+
+function check_dir_change() {
+  if [[ $PWD != "$last_dir" ]]; then
+    last_dir="$PWD"
+
+    if [[ -f .projectrc ]]; then
+      source .projectrc
+    fi
+  fi
+}
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"                   # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
+
+if command -v /home/linuxbrew/.linuxbrew/bin/brew &>/dev/null; then
+  eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+fi
+
+source "${HOME}/.bash_ps1"
