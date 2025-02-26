@@ -11,8 +11,8 @@ check_package "curl"
 check_package "jq"
 check_package "stow"
 check_package "ripgrep"
-check_package "perl"
-check_package "ruby-full"
+#check_package "perl"
+#check_package "ruby-full"
 
 if [ "$EUID" -eq 0 ] && [ -n "${MISSING_PACKAGES}" ]; then
   echo "The following packages are missing: ${MISSING_PACKAGES}"
@@ -48,6 +48,14 @@ if [ "$EUID" -eq 0 ]; then
     sudo sed -i "/^PATH=/ s|\"$|:${NVIM_PATH}\"|" "${ENV_FILE}"
 
     echo "Atualização concluída. Verifique com: cat ${ENV_FILE}"
+  fi
+
+  if ! grep -q "^ODARA_TYPE=" "${ENV_FILE}"; then
+    echo "ODARA_TYPE=servers" | sudo tee -a "${ENV_FILE}" >/dev/null
+
+    echo "Variável ODARA_TYPE=servers adicionada ao ${ENV_FILE}."
+  else
+    echo "A variável ODARA_TYPE já existe no ${ENV_FILE}."
   fi
 fi
 
