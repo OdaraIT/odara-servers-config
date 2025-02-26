@@ -1,67 +1,70 @@
 #!/usr/bin/env bash
 
-# Função para verificar se um pacote está instalado
 check_package() {
   dpkg -l | grep -q "^ii  $1 " || MISSING_PACKAGES+="$1 "
 }
 
-# Verificar pacotes necessários (exceto bat)
 MISSING_PACKAGES=""
 check_package "nvim"
 check_package "jq"
 check_package "stow"
 
-# Se for root, adicionar PPA se necessário e instalar pacotes ausentes
-if [ "$EUID" -eq 0 ] && [ -n "$MISSING_PACKAGES" ]; then
-  echo "Os seguintes pacotes não estão instalados: $MISSING_PACKAGES"
+if [ "$EUID" -eq 0 ] && [ -n "${MISSING_PACKAGES}" ]; then
+  echo "Os seguintes pacotes não estão instalados: ${MISSING_PACKAGES}"
+
   if ! grep -q "neovim-ppa/stable" /etc/apt/sources.list /etc/apt/sources.list.d/* 2>/dev/null; then
     echo "Adicionando PPA do Neovim..."
+
     sudo add-apt-repository -y ppa:neovim-ppa/stable
   fi
+
   echo "Atualizando e instalando pacotes..."
-  sudo apt update && sudo apt install -y $MISSING_PACKAGES
+
+  sudo apt update && sudo apt install -y "${MISSING_PACKAGES}"
 fi
 
-# Instalar Nerd Fonts
 NERD_FONT_DIR="$HOME/.local/share/fonts"
 echo "Baixando e instalando Nerd Fonts..."
 mkdir -p "$NERD_FONT_DIR"
 
-# Instalar FiraCode Nerd Font
 FIRA_FONT_URL="https://github.com/ryanoasis/nerd-fonts/releases/latest/download/FiraCode.zip"
 wget -O "$NERD_FONT_DIR/FiraCode.zip" "$FIRA_FONT_URL"
 unzip -o "$NERD_FONT_DIR/FiraCode.zip" -d "$NERD_FONT_DIR"
 
-# Instalar JetBrains Mono Nerd Font
 JETBRAINS_FONT_URL="https://github.com/ryanoasis/nerd-fonts/releases/latest/download/JetBrainsMono.zip"
 wget -O "$NERD_FONT_DIR/JetBrainsMono.zip" "$JETBRAINS_FONT_URL"
 unzip -o "$NERD_FONT_DIR/JetBrainsMono.zip" -d "$NERD_FONT_DIR"
 
 fc-cache -fv
 
-# Remover SpaceVim se instalado
 if [ -d "$HOME/.SpaceVim" ]; then
   echo "Removendo SpaceVim..."
   curl -sLf https://spacevim.org/install.sh | bash -s -- --uninstall
   rm -rf "$HOME/.SpaceVim"
 fi
 
-# Remover configurações antigas de Vim, Neovim e Bash
 echo "Removendo configurações antigas..."
+
 rm -rf "$HOME/.vim" "$HOME/.vimrc" "$HOME/.config/nvim" "$HOME/.bashrc" "$HOME/.bash_profile"
 
-# Clonar repositório Odara
 echo "Configurando repositório Odara..."
+
 if [ -d "$HOME/.odara" ]; then
   echo "Removendo repositório Odara existente..."
+
   rm -rf "$HOME/.odara"
 fi
+
 git clone https://github.com/OdaraIT/servers.git "$HOME/.odara"
 
 # Navegar até o diretório .odara e rodar stow
 echo "Aplicando stow no repositório Odara..."
-cd "$HOME/.odara"
+
+cd "${HOME}/.odara" || exit
+
 stow bash
 stow nvim
 
 echo "Instalação concluída!"
+
+cd "${HOME}" || exit
