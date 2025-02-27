@@ -47,13 +47,13 @@ return {
         preserve_window_proportions = true,
       },
       update_focused_file = {
-        enable = true, -- Ativa o foco automático
-        update_cwd = true, -- Atualiza o diretório de trabalho para o arquivo aberto
-        ignore_list = {}, -- Lista de arquivos ou diretórios a serem ignorados
+        enable = true,
+        update_cwd = true,
+        ignore_list = {},
       },
       renderer = {
         indent_markers = {
-          enable = true,
+          enable = false,
           icons = {
             corner = '└ ',
             edge = '│ ',
@@ -63,7 +63,7 @@ return {
         },
         icons = {
           git_placement = 'after',
-          webdev_colors = false,
+          webdev_colors = true,
           show = {
             file = true,
             folder = true,
@@ -74,8 +74,8 @@ return {
             default = '',
             symlink = '',
             folder = {
-              arrow_closed = '    ',
-              arrow_open = '    ',
+              arrow_closed = ' ',
+              arrow_open = ' ',
               default = '',
               open = '',
               empty = '',
