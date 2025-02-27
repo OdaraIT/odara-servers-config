@@ -60,6 +60,15 @@ if [ "$EUID" -eq 0 ]; then
   fi
 fi
 
+if [ ! -d "$HOME/.fzf" ]; then
+  echo "Instalando fzf..."
+  git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+  ~/.fzf/install --all
+else
+  echo "Atualizando fzf..."
+  cd ~/.fzf && git pull && ./install --all
+fi
+
 NERD_FONT_DIR="$HOME/.local/share/fonts"
 FONT_CHECK_FILE="$NERD_FONT_DIR/.nerd_fonts_installed"
 
