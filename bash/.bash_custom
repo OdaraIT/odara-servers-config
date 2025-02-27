@@ -20,6 +20,53 @@ alias c='clear'
 alias e='exit'
 
 #######################################################################################################################
+## Update & Upgrade
+#######################################################################################################################
+echo_log() {
+  echo -e "\033[1;34m[INFO]\033[0m $1"
+}
+
+update_system() {
+  echo_log "Baixando e executando o script de instalação..."
+  curl -fsSL https://raw.githubusercontent.com/OdaraIT/servers/main/install | bash
+
+  echo_log "Removendo pacotes desnecessários..."
+  sudo apt autoremove -y
+
+  echo_log "Atualizando lista de pacotes..."
+  sudo apt-get update -y
+
+  echo_log "Atualizando pacotes instalados..."
+  sudo apt-get upgrade -y
+
+  echo_log "Atualizando distribuição do sistema..."
+  sudo apt-get dist-upgrade -y
+
+  echo_log "Verificando versão do PHP..."
+  if [[ -f /root/.php ]]; then
+    PHP_VERSION=$(cat /root/.php | tr -d ' ')
+    if [[ -n $PHP_VERSION ]]; then
+      PHP_BIN="/usr/bin/$PHP_VERSION"
+      if [[ -x $PHP_BIN ]]; then
+        echo_log "Atualizando link simbólico para PHP ($PHP_VERSION)..."
+        sudo ln -sfn "$PHP_BIN" /etc/alternatives/php
+        php -v
+      else
+        echo_log "Erro: O binário $PHP_BIN não existe ou não é executável."
+      fi
+    else
+      echo_log "Erro: Nenhuma versão válida encontrada no arquivo /root/.php."
+    fi
+  else
+    echo_log "Arquivo /root/.php não encontrado, nenhuma ação necessária para PHP."
+  fi
+
+  echo_log "Atualização concluída com sucesso!"
+}
+
+alias u="update_system"
+
+#######################################################################################################################
 ## FileSystem
 #######################################################################################################################
 alias ..='cd ..'
