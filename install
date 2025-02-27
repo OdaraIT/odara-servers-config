@@ -70,38 +70,20 @@ else
 fi
 
 NERD_FONT_DIR="$HOME/.local/share/fonts"
-FONT_CHECK_FILE="$NERD_FONT_DIR/.nerd_fonts_installed"
-
-echo "Downloading and installing Nerd Fonts..."
+FIRA_FONT_MD5="$HOME/.fonts_fira_code"
+JETBRAINS_FONT_MD5="$HOME/.fonts_jetbrains_mono"
 
 mkdir -p "$NERD_FONT_DIR"
-
 FIRA_FONT_URL="https://github.com/ryanoasis/nerd-fonts/releases/latest/download/FiraCode.zip"
 JETBRAINS_FONT_URL="https://github.com/ryanoasis/nerd-fonts/releases/latest/download/JetBrainsMono.zip"
 
-if [ -f "$FONT_CHECK_FILE" ]; then
-  echo "Checking Nerd Fonts integrity..."
+wget -O "$NERD_FONT_DIR/FiraCode.zip" "$FIRA_FONT_URL"
+unzip -o "$NERD_FONT_DIR/FiraCode.zip" -d "$NERD_FONT_DIR"
+find "$NERD_FONT_DIR" -name "FiraCode*" -type f -exec md5sum {} \; >"$FIRA_FONT_MD5"
 
-  if md5sum -c "$FONT_CHECK_FILE" --quiet; then
-    echo "Nerd Fonts are already installed and up-to-date."
-  else
-    echo "Updating Nerd Fonts..."
-
-    wget -O "$NERD_FONT_DIR/FiraCode.zip" "$FIRA_FONT_URL"
-    unzip -o "$NERD_FONT_DIR/FiraCode.zip" -d "$NERD_FONT_DIR"
-    wget -O "$NERD_FONT_DIR/JetBrainsMono.zip" "$JETBRAINS_FONT_URL"
-    unzip -o "$NERD_FONT_DIR/JetBrainsMono.zip" -d "$NERD_FONT_DIR"
-    find "$NERD_FONT_DIR" -type f -exec md5sum {} \; >"$FONT_CHECK_FILE"
-  fi
-else
-  echo "Installing Nerd Fonts for the first time..."
-
-  wget -O "$NERD_FONT_DIR/FiraCode.zip" "$FIRA_FONT_URL"
-  unzip -o "$NERD_FONT_DIR/FiraCode.zip" -d "$NERD_FONT_DIR"
-  wget -O "$NERD_FONT_DIR/JetBrainsMono.zip" "$JETBRAINS_FONT_URL"
-  unzip -o "$NERD_FONT_DIR/JetBrainsMono.zip" -d "$NERD_FONT_DIR"
-  find "$NERD_FONT_DIR" -type f -exec md5sum {} \; >"$FONT_CHECK_FILE"
-fi
+wget -O "$NERD_FONT_DIR/JetBrainsMono.zip" "$JETBRAINS_FONT_URL"
+unzip -o "$NERD_FONT_DIR/JetBrainsMono.zip" -d "$NERD_FONT_DIR"
+find "$NERD_FONT_DIR" -name "JetBrainsMono*" -type f -exec md5sum {} \; >"$JETBRAINS_FONT_MD5"
 
 fc-cache -fv
 
