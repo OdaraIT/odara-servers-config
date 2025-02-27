@@ -210,7 +210,13 @@ return {
         diagnostic_signs[vim.diagnostic.severity[type]] = icon
       end
 
-      vim.diagnostic.config({ signs = { text = diagnostic_signs } })
+      vim.diagnostic.config({
+        signs = { text = diagnostic_signs },
+        virtual_text = false, -- Desativa os diagnósticos inline
+        underline = false, -- Mantém o sublinhado em erros e warnings
+        update_in_insert = false, -- Não atualiza diagnósticos enquanto digita
+        severity_sort = true, -- Ordena os diagnósticos por severidade
+      })
     end
 
     -- }}}

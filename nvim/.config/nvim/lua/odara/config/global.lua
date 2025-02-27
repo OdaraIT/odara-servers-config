@@ -5,4 +5,10 @@ return {
   python_path = '/home/linuxbrew/.linuxbrew/bin/python3',
   skip_lsp = false,
   skip_none_ls = false,
+  has_nerd_font = true,
+  linters = {
+    enable_phpstan = true,
+    enable_phpcs = false,
+    enable_phpmd = false,
+  },
 }
