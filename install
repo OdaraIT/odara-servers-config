@@ -1,9 +1,71 @@
 #!/usr/bin/env bash
 
-if [ "$EUID" -eq 0 ]; then
+RED="\e[31m"
+GREEN="\e[32m"
+YELLOW="\e[33m"
+CYAN="\e[36m"
+WHITE="\e[97m"
+MAGENTA="\e[35m"
+RESET="\e[0m"
+
+SUCCESS_ICON=" "  # \uf00c
+ERROR_ICON=" "    # \uf00d
+WARNING_ICON="  " # \uf071
+INFO_ICON=" "     # \uf05a
+DOWNLOAD_ICON=" " # \uf0eb
+DELETE_ICON=" "   # \uf014
+GIT_ICON=" "      # \uf1d3
+
+msg() {
+  local type="$1"
+  local text="$2"
+  local icon=""
+  local color=""
+
+  case "$type" in
+    success)
+      icon="$SUCCESS_ICON"
+      color="$GREEN"
+      ;;
+    error)
+      icon="$ERROR_ICON"
+      color="$RED"
+      ;;
+    warning)
+      icon="$WARNING_ICON"
+      color="$YELLOW"
+      ;;
+    info)
+      icon="$INFO_ICON"
+      color="$CYAN"
+      ;;
+    download)
+      icon="$DOWNLOAD_ICON"
+      color="$WHITE"
+      ;;
+    delete)
+      icon="$DELETE_ICON"
+      color="$RED"
+      ;;
+    git)
+      icon="$GIT_ICON"
+      color="$MAGENTA"
+      ;;
+    *)
+      icon=" "
+      color="$WHITE"
+      ;;
+  esac
+
+  echo -e "${color}${icon}${text}${RESET}"
+}
+
+if [[ $EUID -eq 0 ]]; then
+  msg info "Installing required packages..."
+
   sudo apt install -y git curl jq stow ripgrep perl ruby-full build-essential clang
 
-  echo "Installing Neovim globally"
+  msg info "Installing Neovim globally..."
 
   NVIM_URL="https://github.com/neovim/neovim/releases/latest/download/nvim-linux-x86_64.tar.gz"
   NVIM_DEST="/opt/nvim"
@@ -21,69 +83,78 @@ if [ "$EUID" -eq 0 ]; then
   ENV_FILE="/etc/environment"
   NVIM_PATH="/opt/nvim/bin"
 
-  if grep -qE "^PATH=.*${NVIM_PATH}" "${ENV_FILE}"; then
-    echo "O caminho ${NVIM_PATH} já está na variável PATH."
-  else
-    echo "Adicionando ${NVIM_PATH} à variável PATH..."
-
+  if ! grep -qE "^PATH=.*${NVIM_PATH}" "${ENV_FILE}"; then
+    msg info "Adding Neovim to PATH..."
     sudo sed -i "/^PATH=/ s|\"$|:${NVIM_PATH}\"|" "${ENV_FILE}"
-
-    echo "Atualização concluída. Verifique com: cat ${ENV_FILE}"
   fi
 
   if ! grep -q "^ODARA_TYPE=" "${ENV_FILE}"; then
     echo "ODARA_TYPE=servers" | sudo tee -a "${ENV_FILE}" >/dev/null
-
-    echo "Variável ODARA_TYPE=servers adicionada ao ${ENV_FILE}."
-  else
-    echo "A variável ODARA_TYPE já existe no ${ENV_FILE}."
   fi
 fi
 
-if [ ! -d "$HOME/.fzf" ]; then
-  echo "Instalando fzf..."
+if [[ ! -d "$HOME/.fzf" ]]; then
+  msg download "Installing fzf..."
   git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
   ~/.fzf/install --all
 else
-  echo "Atualizando fzf..."
+  msg info "Updating fzf..."
   cd ~/.fzf && git pull && ./install --all
 fi
 
-NERD_FONT_DIR="$HOME/.local/share/fonts"
-FIRA_FONT_MD5="$HOME/.fonts_fira_code"
-JETBRAINS_FONT_MD5="$HOME/.fonts_jetbrains_mono"
+update_nerd_font() {
+  FONT_NAME="$1"
+  FONT_URL="$2"
+  FONT_DIR="${HOME}/.local/share/fonts"
+  TEMP_DIR="$(mktemp -d)"
+  STORAGE_DIR="${HOME}/.odara/storage"
+  HASH_FILE="${STORAGE_DIR}/${FONT_NAME}.hash"
 
-mkdir -p "$NERD_FONT_DIR"
-FIRA_FONT_URL="https://github.com/ryanoasis/nerd-fonts/releases/latest/download/FiraCode.zip"
-JETBRAINS_FONT_URL="https://github.com/ryanoasis/nerd-fonts/releases/latest/download/JetBrainsMono.zip"
+  mkdir -p "${FONT_DIR}" "${STORAGE_DIR}"
 
-wget -O "$NERD_FONT_DIR/FiraCode.zip" "$FIRA_FONT_URL"
-unzip -o "$NERD_FONT_DIR/FiraCode.zip" -d "$NERD_FONT_DIR"
-find "$NERD_FONT_DIR" -name "FiraCode*" -type f -exec md5sum {} \; >"$FIRA_FONT_MD5"
+  msg download "Downloading ${FONT_NAME} Nerd Font..."
 
-wget -O "$NERD_FONT_DIR/JetBrainsMono.zip" "$JETBRAINS_FONT_URL"
-unzip -o "$NERD_FONT_DIR/JetBrainsMono.zip" -d "$NERD_FONT_DIR"
-find "$NERD_FONT_DIR" -name "JetBrainsMono*" -type f -exec md5sum {} \; >"$JETBRAINS_FONT_MD5"
+  wget -q --show-progress -O "${TEMP_DIR}/${FONT_NAME}.zip" "${FONT_URL}"
 
-fc-cache -fv
+  NEW_HASH=$(sha256sum "${TEMP_DIR}/${FONT_NAME}.zip" | awk '{print $1}')
 
-if [ -d "$HOME/.SpaceVim" ]; then
-  echo "Removing SpaceVim..."
+  if [[ -f ${HASH_FILE} && $(cat "${HASH_FILE}") == "${NEW_HASH}" ]]; then
+    msg info "No updates found for ${FONT_NAME}. Skipping installation."
 
+    rm -rf "${TEMP_DIR}"
+
+    return
+  fi
+
+  msg info "Extracting font files..."
+
+  unzip -q "${TEMP_DIR}/${FONT_NAME}.zip" -d "${TEMP_DIR}"
+
+  msg info "Moving fonts to ${FONT_DIR}..."
+
+  mv -vf "${TEMP_DIR}"/*.ttf "${FONT_DIR}/"
+
+  msg info "Updating font cache..."
+
+  fc-cache -fv
+
+  echo "${NEW_HASH}" >"${HASH_FILE}"
+
+  msg success "${FONT_NAME} Nerd Font successfully updated!"
+}
+
+update_nerd_font "JetBrainsMono" "https://github.com/ryanoasis/nerd-fonts/releases/latest/download/JetBrainsMono.zip"
+update_nerd_font "FiraCode" "https://github.com/ryanoasis/nerd-fonts/releases/latest/download/FiraCode.zip"
+
+if [[ -d "$HOME/.SpaceVim" ]]; then
+  msg delete "Removing SpaceVim..."
   curl -sLf https://spacevim.org/install.sh | bash -s -- --uninstall
-
   rm -rf "${HOME}/.SpaceVim" "${HOME}/.SpaceVim.d"
-
-  if [ -L "${HOME}/.nvim" ]; then
-    unlink "${HOME}/.nvim"
-  fi
-
-  if [ -L "${HOME}/.vim" ]; then
-    unlink "${HOME}/.vim"
-  fi
+  unlink "${HOME}/.nvim" 2>/dev/null
+  unlink "${HOME}/.vim" 2>/dev/null
 fi
 
-echo "Removing old configurations..."
+msg delete "Removing old configurations..."
 
 FILES=(
   "${HOME}/.bashrc"
@@ -98,30 +169,20 @@ FILES=(
 )
 
 for FILE in "${FILES[@]}"; do
-  if [ -L "${FILE}" ]; then
-    unlink "${FILE}"
-  elif [ -d "${FILE}" ] || [ -f "${FILE}" ]; then
-    rm -rf "${FILE}"
-  fi
+  [[ -L ${FILE} || -e ${FILE} ]] && rm -rf "${FILE}"
 done
 
-echo "Configuring Odara repository..."
+msg git "Configuring Odara repository..."
 
-if [ -d "$HOME/.odara" ]; then
-  echo "Removing existing Odara repository..."
-
-  rm -rf "$HOME/.odara"
-fi
+[[ -d "$HOME/.odara" ]] && rm -rf "$HOME/.odara"
 
 git clone https://github.com/OdaraIT/servers.git "$HOME/.odara"
 
-echo "Applying stow to Odara repository..."
+msg git "Applying stow to Odara repository..."
 
 cd "${HOME}/.odara" || exit
 
 stow bash
 stow nvim
 
-echo "Installation completed!"
-
-cd "${HOME}" || exit
+msg success "Installation completed!"
