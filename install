@@ -1,28 +1,8 @@
 #!/usr/bin/env bash
 
-check_package() {
-  dpkg -l | grep -q "^ii  $1 " || MISSING_PACKAGES+="$1 "
-}
-
-MISSING_PACKAGES=""
-
-# sudo apt install -y git curl jq stow ripgrep perl ruby-full
-check_package "git"
-check_package "curl"
-check_package "jq"
-check_package "stow"
-check_package "ripgrep"
-check_package "perl"
-check_package "ruby-full"
-
-if [ "$EUID" -eq 0 ] && [ -n "${MISSING_PACKAGES}" ]; then
-  echo "The following packages are missing: ${MISSING_PACKAGES}"
-
-  echo "Updating and installing missing packages..."
-  sudo apt update && sudo apt install -y "${MISSING_PACKAGES}"
-fi
-
 if [ "$EUID" -eq 0 ]; then
+  sudo apt install -y git curl jq stow ripgrep perl ruby-full build-essential clang
+
   echo "Installing Neovim globally"
 
   NVIM_URL="https://github.com/neovim/neovim/releases/latest/download/nvim-linux-x86_64.tar.gz"
