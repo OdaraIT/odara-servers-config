@@ -6,7 +6,6 @@ local keymap = vim.keymap
 -- General Keymaps -------------------
 
 keymap.set('i', 'jk', '<ESC>', { desc = 'Exit insert mode with jk' })
-keymap.set('i', 'jj', '<ESC>', { desc = 'Exit insert mode with jj' })
 keymap.set('i', ':w', '<ESC>:w<CR>', { desc = 'Exit insert and save' })
 
 -- clear search highlights
@@ -63,30 +62,6 @@ vim.api.nvim_create_autocmd({ 'InsertEnter' }, { pattern = '*', command = 'set n
 vim.api.nvim_create_autocmd({ 'InsertLeave' }, { pattern = '*', command = 'set relativenumber' })
 
 -- Notes
-vim.keymap.set('n', '<leader>nt', function()
-  local buf = vim.api.nvim_create_buf(false, true)
-  local width = math.floor(vim.o.columns * 0.7)
-  local height = math.floor(vim.o.lines * 0.7)
-  local row = math.floor((vim.o.lines - height) / 2)
-  local col = math.floor((vim.o.columns - width) / 2)
-
-  local win = vim.api.nvim_open_win(buf, true, {
-    relative = 'editor',
-    width = width,
-    height = height,
-    row = row,
-    col = col,
-    style = 'minimal',
-    border = 'rounded',
-  })
-
-  vim.cmd('edit ' .. vim.fn.expand('~/.odara/NOTES.md'))
-
-  vim.wo[win].winhl = 'Normal:NormalFloat'
-  vim.wo[win].signcolumn = 'no'
-
-  vim.api.nvim_buf_set_keymap(buf, 'n', '<Esc>', '<cmd>close<CR>', { noremap = true, silent = true })
-end, { desc = 'Open Global [N]o[t]es' })
 
 -- Whitespace Chars
 -- vim.keymap.set('n', '<leader>tl', function()
@@ -96,3 +71,17 @@ end, { desc = 'Open Global [N]o[t]es' })
 --     vim.opt.list = true
 --   end
 -- end, { desc = '[T]oggle [L]ist Mode (whitespace chars)' })
+
+vim.api.nvim_set_keymap('n', '<leader>tk', ':lua AddTask()<CR>', { noremap = true, silent = true })
+
+function AddTask()
+  vim.ui.input({ prompt = 'Nova Tarefa: ' }, function(input)
+    if input and input ~= '' then
+      local cmd = 'task add ' .. vim.fn.shellescape(input)
+      vim.fn.system(cmd)
+      print('Tarefa adicionada: ' .. input)
+    else
+      print('Operação cancelada')
+    end
+  end)
+end
