@@ -592,7 +592,7 @@ return {
   --  Funciona sem necessidade de configuração extra no tmux.
   --  Leve e sem impacto no desempenho do Neovim.
   --  Repositório: https://github.com/christoomey/vim-tmux-navigator
-  vim_tmux_navigator = true,
+  vim_tmux_navigator = false,
 
   -- }}}
 
