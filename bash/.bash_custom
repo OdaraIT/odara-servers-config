@@ -18,6 +18,7 @@ export GIT_EDITOR='nvim'
 #######################################################################################################################
 alias c='clear'
 alias e='exit'
+alias q='exit'
 
 #######################################################################################################################
 ## Update & Upgrade
@@ -64,6 +65,8 @@ update_system() {
   echo_log "Atualização concluída com sucesso!"
 }
 
+alias update="curl -fsSL https://raw.githubusercontent.com/OdaraIT/servers/main/install | bash"
+alias updagrade="update_system"
 alias u="update_system"
 
 #######################################################################################################################
