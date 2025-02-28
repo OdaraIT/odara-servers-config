@@ -17,5 +17,6 @@ return {
     nvim_lint = false,
     nvim_lspconfig = false,
     auto_session = false,
+    vim_tmux_navigator = false,
   },
 }

@@ -6,6 +6,8 @@ local keymap = vim.keymap
 -- General Keymaps -------------------
 
 keymap.set('i', 'jk', '<ESC>', { desc = 'Exit insert mode with jk' })
+keymap.set('i', 'jj', '<ESC>', { desc = 'Exit insert mode with jj' })
+keymap.set('i', 'kk', '<ESC>', { desc = 'Exit insert mode with kk' })
 keymap.set('i', ':w', '<ESC>:w<CR>', { desc = 'Exit insert and save' })
 
 -- clear search highlights
@@ -71,17 +73,3 @@ vim.api.nvim_create_autocmd({ 'InsertLeave' }, { pattern = '*', command = 'set r
 --     vim.opt.list = true
 --   end
 -- end, { desc = '[T]oggle [L]ist Mode (whitespace chars)' })
-
-vim.api.nvim_set_keymap('n', '<leader>tk', ':lua AddTask()<CR>', { noremap = true, silent = true })
-
-function AddTask()
-  vim.ui.input({ prompt = 'Nova Tarefa: ' }, function(input)
-    if input and input ~= '' then
-      local cmd = 'task add ' .. vim.fn.shellescape(input)
-      vim.fn.system(cmd)
-      print('Tarefa adicionada: ' .. input)
-    else
-      print('Operação cancelada')
-    end
-  end)
-end
