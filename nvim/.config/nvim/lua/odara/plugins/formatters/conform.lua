@@ -42,6 +42,7 @@ return {
         typescript = { 'prettier' },
         javascriptreact = { 'prettier' },
         typescriptreact = { 'prettier' },
+        nginx = { 'shfmt' },
         css = { 'prettier' },
         html = { 'prettier' },
         json = { 'prettier' },
