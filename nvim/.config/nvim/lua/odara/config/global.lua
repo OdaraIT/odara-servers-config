@@ -54,6 +54,6 @@ return {
     nerd_font = 'JetBrains Mono Nerd Font',
   },
   binaries = {
-    python_path = '/home/linuxbrew/.linuxbrew/bin/python3',
+    python_path = os.getenv('ODARA_PYTHON_PATH') or '/home/linuxbrew/.linuxbrew/bin/python3',
   },
 }
