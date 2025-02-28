@@ -77,48 +77,15 @@ return {
           i = { ['<C-Enter>'] = 'to_fuzzy_refine' },
         },
 
-        vimgrep_arguments = {
-          'rg',
-          '--color=never',
-          '--no-heading',
-          '--with-filename',
-          '--line-number',
-          '--column',
-          '--hidden',
-          '--smart-case',
-          -- '--ignore-file',
-          -- '.gitignore',
-          -- '--exclude',
-          -- 'node_modules',
-          -- '--exclude',
-          -- 'build',
-          -- '--exclude',
-          -- '.env',
-          -- '--exclude',
-          -- '*.log',
-          -- '--exclude',
-          -- 'vendor',
-          -- '--exclude',
-          -- '*.phar',
-          -- '--exclude',
-          -- '*.bak',
-        },
+        vimgrep_arguments = vim.g.odara.global.files.vimgrep_arguments,
 
-        file_ignore_patterns = {
-          'node_modules', -- Ignora node_modules
-          'build', -- Ignora build
-          '.git', -- Ignora diretórios .git
-          '*.log', -- Ignora arquivos de log
-          '.env', -- Ignora arquivos .env
-          'vendor', -- Ignora diretório vendor (Composer)
-          '*.phar', -- Ignora arquivos PHAR (PHP Archive)
-          '*.bak', -- Ignora arquivos de backup
-        },
+        file_ignore_patterns = vim.g.odara.global.files.file_ignore_patterns,
       },
 
       pickers = {
         find_files = {
-          hidden = vim.g.odara.show_ignored_files,
+          hidden = vim.g.odara.global.files.hidden_files,
+          -- hidden = vim.g.odara.show_ignored_files,
           -- no_ignore = vim.g.odara.telescope.pickers.find_files.no_ignore or false,
           -- no_ignore_parent = vim.g.odara.telescope.pickers.find_files.no_ignore_parent or false,
         },
@@ -163,6 +130,7 @@ return {
     vim.keymap.set('n', '<leader>s.', builtin.oldfiles, { desc = '[S]earch Recent Files' })
     vim.keymap.set('n', '<leader>so', builtin.vim_options, { desc = '[S]earch Neovim [O]ptions' })
     vim.keymap.set('n', '<leader>sh', builtin.search_history, { desc = '[S]earch [H]istory' })
+    -- vim.keymap.set('n', '<leader><leader>', builtin.current_buffer_fuzzy_find, { desc = '[S]earch [H]istory' })
 
     -- Fuzzy find no buffer atual
     vim.keymap.set('n', '<leader>/', function()

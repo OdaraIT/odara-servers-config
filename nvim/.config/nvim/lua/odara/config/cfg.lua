@@ -1,7 +1,3 @@
-vim.api.nvim_create_autocmd('VimEnter', {
-  callback = function() end,
-})
-
 local project_root = vim.fn.getcwd()
 local config_file = project_root .. '/.nvim.lua'
 local local_config = {}
@@ -23,9 +19,17 @@ local odara_type = os.getenv('ODARA_TYPE') or 'dev'
 local servers_config = {}
 
 if odara_type == 'servers' then
+  config.global.is_dev = true
+  config.global.is_servers = true
+
   servers_config = require('odara.config.servers')
+else
+  config.global.is_dev = true
+  config.global.is_servers = false
 end
 
 config = vim.tbl_deep_extend('force', config, servers_config, local_config)
+
+print(config.global.files.hidden_files)
 
 vim.g.odara = config

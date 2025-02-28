@@ -1,85 +1,82 @@
 vim.cmd('let g:netrw_liststyle = 3')
 
-local global = vim.g
-local opt = vim.opt
-
 vim.loader.enable()
 
 -- Set <space> as the leader key
 -- See `:help mapleader`
-global.mapleader = ' '
-global.maplocalleader = ' '
+vim.g.mapleader = ' '
+vim.g.maplocalleader = ' '
 
 -- Set to true if you have a Nerd Font installed and selected in the terminal
-global.have_nerd_font = true
+vim.g.have_nerd_font = vim.g.odara.global.fonts.nerd_font_available
 
 -- line numbers
-opt.relativenumber = true -- show relative line numbers
-opt.number = true -- shows absolute line number on cursor line (when relative number is on)
+vim.opt.relativenumber = true -- show relative line numbers
+vim.opt.number = true -- shows absolute line number on cursor line (when relative number is on)
 
 -- Enable mouse mode, can be useful for resizing splits for example!
-opt.mouse = 'a'
+vim.opt.mouse = 'a'
 
 -- Don't show the mode, since it's already in the status line
-opt.showmode = false
+vim.opt.showmode = false
 
 -- Clipboard
-opt.clipboard:append('unnamedplus')
+vim.opt.clipboard:append('unnamedplus')
 
 -- Complete
-opt.completeopt = { 'noinsert', 'menuone', 'noselect' }
+vim.opt.completeopt = { 'noinsert', 'menuone', 'noselect' }
 
 -- tabs & indentation
-opt.tabstop = 2 -- 2 spaces for tabs (prettier default)
-opt.shiftwidth = 2 -- 2 spaces for indent width
-opt.expandtab = true -- expand tab to spaces
-opt.autoindent = true -- copy indent from current line when starting new one
+vim.opt.tabstop = 2 -- 2 spaces for tabs (prettier default)
+vim.opt.shiftwidth = 2 -- 2 spaces for indent width
+vim.opt.expandtab = true -- expand tab to spaces
+vim.opt.autoindent = true -- copy indent from current line when starting new one
 
 -- line wrapping
-opt.wrap = false -- disable line wrapping
+vim.opt.wrap = false -- disable line wrapping
 
 -- Case-insensitive searching UNLESS \C or one or more capital letters in the search term
-opt.ignorecase = true -- ignore case when searching
-opt.smartcase = true -- if you include mixed case in your search, assumes you want case-sensitive
+vim.opt.ignorecase = true -- ignore case when searching
+vim.opt.smartcase = true -- if you include mixed case in your search, assumes you want case-sensitive
 
 -- cursor line
-opt.cursorline = true -- highlight the current cursor line
+vim.opt.cursorline = true -- highlight the current cursor line
 
 -- Enable break indent
-opt.breakindent = true
+vim.opt.breakindent = true
 
 -- Save undo history
-opt.undofile = true
+vim.opt.undofile = true
 
 -- Decrease update time
-opt.updatetime = 250
+vim.opt.updatetime = 250
 
 -- Decrease mapped sequence wait time
 vim.o.timeout = true
-opt.timeoutlen = 1000
+vim.opt.timeoutlen = 1000
 vim.o.ttimeoutlen = 10
 
 -- Preview substitutions live, as you type!
-opt.inccommand = 'split'
+vim.opt.inccommand = 'split'
 
 -- Minimal number of screen lines to keep above and below the cursor.
-opt.scrolloff = 10
+vim.opt.scrolloff = 10
 
 -- appearance
 -- turn on termguicolors for nightfly colorscheme to work
 -- (have to use iterm2 or any other true color terminal)
-opt.termguicolors = true
-opt.background = 'dark' -- colorschemes that can be light or dark will be made dark
-opt.signcolumn = 'yes' -- show sign column so that text doesn't shift
+vim.opt.termguicolors = true
+vim.opt.background = 'dark' -- colorschemes that can be light or dark will be made dark
+vim.opt.signcolumn = 'yes' -- show sign column so that text doesn't shift
 
 -- backspace
-opt.backspace = 'indent,eol,start' -- allow backspace on indent, end of line or insert mode start position
+vim.opt.backspace = 'indent,eol,start' -- allow backspace on indent, end of line or insert mode start position
 
 -- Sets how neovim will display certain whitespace characters in the editor.
 --  See `:help 'list'`
 --  and `:help 'listchars'`
-opt.list = false
-opt.listchars = {
+vim.opt.list = false
+vim.opt.listchars = {
   tab = '▸ ', -- Representação de tabulação
   trail = '·', -- Espaços em branco no final da linha
   nbsp = '␣', -- Espaços não quebráveis
@@ -90,21 +87,15 @@ opt.listchars = {
   multispace = '⋅', -- Diferencia múltiplos espaços
   leadmultispace = '│⋅', -- Representação especial para múltiplos espaços no início da linha
 }
-opt.splitright = true -- split vertical window to the right
-opt.splitbelow = true -- split horizontal window to the bottom
-opt.swapfile = false
 
-vim.api.nvim_create_autocmd('BufWritePre', {
-  pattern = '*',
-  callback = function()
-    local last_line = vim.fn.getline('$') -- Obtém a última linha do arquivo
+-- Splits
+vim.opt.splitright = true -- split vertical window to the right
+vim.opt.splitbelow = true -- split horizontal window to the bottom
 
-    if last_line ~= '' then
-      vim.api.nvim_buf_set_lines(0, -1, -1, true, { '' }) -- Adiciona uma linha vazia no final
-    end
-  end,
-})
+-- Swapfiles
+vim.opt.swapfile = false
 
+-- Folding Options
 vim.o.foldcolumn = '1'
 vim.o.foldlevel = 99
 vim.o.foldlevelstart = 99
@@ -112,4 +103,4 @@ vim.o.foldenable = true
 vim.o.foldmethod = 'marker'
 
 -- Python
-vim.g.python3_host_prog = vim.g.odara.global.python_path
+vim.g.python3_host_prog = vim.g.odara.global.binaries.python_path
