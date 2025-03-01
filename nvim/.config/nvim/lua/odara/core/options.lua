@@ -103,4 +103,5 @@ vim.o.foldenable = true
 vim.o.foldmethod = 'marker'
 
 -- Python
+vim.g.python_host_prog = vim.g.odara.global.binaries.python_path
 vim.g.python3_host_prog = vim.g.odara.global.binaries.python_path

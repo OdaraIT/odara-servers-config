@@ -31,6 +31,16 @@ return {
       enabled = true,
     },
 
+    -- NOTE:   Fonte de autocompletar para a linha de comando do Neovim.
+    --   Fornece sugestões enquanto digita comandos no modo de comando (`:`).
+    --   Integra-se com nvim-cmp para um fluxo de trabalho mais rápido e fluído.
+    --   Suporte a argumentos de comandos e histórico de entradas anteriores.
+    --   Repositório: https://github.com/hrsh7th/cmp-cmdline
+    {
+      'hrsh7th/cmp-cmdline',
+      enabled = true,
+    },
+
     -- NOTE:  Fonte de autocompletar para LSP no nvim-cmp.
     --  Fornece sugestões inteligentes baseadas em servidores LSP ativos.
     --  Suporte para snippets, assinaturas de funções e documentação inline.
@@ -137,6 +147,7 @@ return {
     table.insert(sources, { name = 'nvim_lsp' })
     table.insert(sources, { name = 'buffer' })
     table.insert(sources, { name = 'path' })
+    table.insert(sources, { name = 'cmdline' })
 
     setup.sources = cmp.config.sources(sources)
 

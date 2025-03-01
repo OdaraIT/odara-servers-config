@@ -33,6 +33,12 @@ return {
           args = { 'verify' },
           stdin = false,
         },
+
+        nginxfmt = {
+          command = 'nginxfmt',
+          args = { '--indent', '2', vim.fn.expand('%:p') },
+          stdin = false,
+        },
       },
 
       formatters_by_ft = {
@@ -42,7 +48,7 @@ return {
         typescript = { 'prettier' },
         javascriptreact = { 'prettier' },
         typescriptreact = { 'prettier' },
-        nginx = { 'shfmt' },
+        nginx = { 'nginxfmt' },
         css = { 'prettier' },
         html = { 'prettier' },
         json = { 'prettier' },
@@ -51,6 +57,7 @@ return {
         graphql = { 'prettier' },
         python = { 'isort', 'black' },
         sh = { 'shfmt' },
+        bash = { 'shfmt' },
         zsh = { 'shfmt' },
         systemd = { 'systemd_analyze' },
         php = { 'php_cs_fixer' },
@@ -68,12 +75,5 @@ return {
     vim.keymap.set({ 'n', 'v' }, '<leader>ff', function()
       conform.format(format_opts)
     end, { desc = '[F]ormat [F]ile or Range' })
-
-    vim.api.nvim_create_autocmd('BufWritePre', {
-      pattern = { '*.sh', '*.zsh' },
-      callback = function()
-        require('conform').format()
-      end,
-    })
   end,
 }
