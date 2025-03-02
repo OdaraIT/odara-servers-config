@@ -6,7 +6,8 @@ return {
   --   Repositório: https://github.com/nathom/filetype.nvim
   'nathom/filetype.nvim',
 
-  enabled = vim.g.odara.plugins.filetype_nvim or false,
+  enabled = false,
+  -- enabled = vim.g.odara.plugins.filetype_nvim or false,
 
   config = function()
     vim.g.did_load_filetypes = 0

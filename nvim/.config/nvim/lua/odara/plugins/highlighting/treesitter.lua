@@ -68,6 +68,7 @@ return {
         'vimdoc',
         'c',
         'regex',
+        'ini',
       },
 
       incremental_selection = {

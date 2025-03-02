@@ -9,5 +9,7 @@ vim.filetype.add({
     ['.bash_logout'] = 'bash',
     ['.bash_ps1'] = 'bash',
     ['.bash_profile'] = 'bash',
+    ['.taskrc'] = 'ini',
+    ['taskrc'] = 'ini',
   },
 })
