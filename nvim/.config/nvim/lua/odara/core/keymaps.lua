@@ -7,6 +7,9 @@ vim.keymap.set('i', ':w', '<ESC>:w<CR>', { desc = 'Exit insert and save' })
 -- clear search highlights
 vim.keymap.set('n', '<leader>nh', ':nohl<CR>', { desc = 'Clear search highlights' })
 
+-- Reload Lua File
+vim.keymap.set('n', '<leader>rl', ':source %<CR>', { desc = '[R]eload [L]ua File' })
+
 -- Lazy
 vim.keymap.set('n', '<leader>lz', ':Lazy<CR>', { desc = '[L]a[z]y Plugin Manager' })
 

@@ -40,27 +40,25 @@ return {
 
     nvimtree.setup({
       respect_buf_cwd = true,
+
       view = {
         width = 60,
         relativenumber = true,
         cursorline = true,
         preserve_window_proportions = true,
       },
+
       update_focused_file = {
         enable = true,
         update_cwd = true,
         ignore_list = {},
       },
+
       renderer = {
         indent_markers = {
           enable = false,
-          icons = {
-            corner = '└ ',
-            edge = '│ ',
-            item = '│ ',
-            none = '  ',
-          },
         },
+
         icons = {
           git_placement = 'after',
           webdev_colors = true,
@@ -70,12 +68,13 @@ return {
             folder_arrow = true,
             git = true,
           },
+
           glyphs = {
             default = '',
             symlink = '',
             folder = {
-              arrow_closed = ' ',
-              arrow_open = ' ',
+              arrow_closed = '   ',
+              arrow_open = '   ',
               default = '',
               open = '',
               empty = '',
@@ -103,16 +102,9 @@ return {
         },
       },
       filters = {
-        custom = {
-          '^.git$', -- Oculta a pasta .git
-          '^node_modules$', -- Oculta dependências do Node.js (caso use npm/yarn no projeto)
-          '^vendor$', -- Oculta dependências do Composer
-          '.*.log$', -- Oculta arquivos de log
-          '.*.cache$', -- Oculta arquivos de cache
-          '.*.swp$', -- Oculta arquivos swap do Vim
-          '__pycache__', -- Oculta cache do Python (caso misture scripts)
-          '.DS_Store', -- Oculta arquivos do macOS
-        },
+        custom = vim.g.odara.global.files.tree_ignore_patterns,
+        dotfiles = vim.g.odara.global.files.dotfiles,
+        git_ignored = not vim.g.odara.global.files.git_no_ignore,
       },
       git = {
         enable = true,
@@ -123,13 +115,7 @@ return {
 
     local keymap = vim.keymap
 
-    keymap.set('n', '<leader>ee', '<cmd>NvimTreeToggle<CR>', { desc = 'File [E]xplor[e]r: Toggle' })
-    keymap.set(
-      'n',
-      '<leader>ef',
-      '<cmd>NvimTreeFindFileToggle<CR>',
-      { desc = 'File [E]xplorer: Toggle on Current [F]ile' }
-    )
+    keymap.set('n', '<leader>ee', '<cmd>NvimTreeToggle<CR>', { desc = 'Toggle File [E]xplor[e]r' })
     keymap.set('n', '<leader>ec', '<cmd>NvimTreeCollapse<CR>', { desc = 'File [E]xplorer: [C]ollapse' })
     keymap.set('n', '<leader>er', '<cmd>NvimTreeRefresh<CR>', { desc = 'File [E]xplorer: [R]efresh' })
   end,

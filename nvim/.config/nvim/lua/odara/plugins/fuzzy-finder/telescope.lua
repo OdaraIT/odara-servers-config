@@ -66,6 +66,7 @@ return {
       enabled = vim.g.odara.plugins.luasnip and vim.g.odara.plugins.telescope_luasnip_nvim,
     },
   },
+
   config = function()
     local telescope = require('telescope')
     local builtin = require('telescope.builtin')
@@ -79,16 +80,7 @@ return {
 
         vimgrep_arguments = vim.g.odara.global.files.vimgrep_arguments,
 
-        file_ignore_patterns = vim.g.odara.global.files.file_ignore_patterns,
-      },
-
-      pickers = {
-        find_files = {
-          hidden = vim.g.odara.global.files.hidden_files,
-          -- hidden = vim.g.odara.show_ignored_files,
-          -- no_ignore = vim.g.odara.telescope.pickers.find_files.no_ignore or false,
-          -- no_ignore_parent = vim.g.odara.telescope.pickers.find_files.no_ignore_parent or false,
-        },
+        file_ignore_patterns = vim.g.odara.global.files.ignore_patterns,
       },
 
       extensions = {
@@ -117,41 +109,45 @@ return {
 
     -- Keymaps {{{
 
-    vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = '[S]earch [H]elp' })
-    vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = '[S]earch [K]eymaps' })
-    vim.keymap.set('n', '<leader>sf', builtin.find_files, { desc = '[S]earch [F]iles' })
-    vim.keymap.set('n', '<leader>sF', builtin.find_files, { desc = '[S]earch [F]iles' })
-    vim.keymap.set('n', '<leader>ss', builtin.builtin, { desc = '[S]earch [S]elect Telescope' })
-    vim.keymap.set('n', '<leader>sw', builtin.grep_string, { desc = '[S]earch current [W]ord' })
-    vim.keymap.set('n', '<leader>sm', '<cmd>Telescope marks<cr>', { desc = '[S]earch [M]arks' })
-    vim.keymap.set('n', '<leader>sg', builtin.live_grep, { desc = '[S]earch by [G]rep' })
-    vim.keymap.set('n', '<leader>sd', builtin.diagnostics, { desc = '[S]earch [D]iagnostics' })
-    vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = '[S]earch [R]esume' })
-    vim.keymap.set('n', '<leader>s.', builtin.oldfiles, { desc = '[S]earch Recent Files' })
-    vim.keymap.set('n', '<leader>so', builtin.vim_options, { desc = '[S]earch Neovim [O]ptions' })
-    vim.keymap.set('n', '<leader>sh', builtin.search_history, { desc = '[S]earch [H]istory' })
-    -- vim.keymap.set('n', '<leader><leader>', builtin.current_buffer_fuzzy_find, { desc = '[S]earch [H]istory' })
+    local keymap = require('odara.helpers.telescope.keymap')
+    local cwd = vim.fn.stdpath('config')
 
-    -- Fuzzy find no buffer atual
-    vim.keymap.set('n', '<leader>/', function()
-      builtin.current_buffer_fuzzy_find(themes.get_dropdown({
-        winblend = 10,
-        previewer = false,
-      }))
-    end, { desc = '[/] Fuzzily search in current buffer' })
+    keymap.set_fn('<leader>sh', builtin.help_tags, '[S]earch [H]elp')
+    keymap.set_fn('<leader>sk', builtin.keymaps, '[S]earch [K]eymaps')
+    keymap.set_fn('<leader>ss', builtin.builtin, '[S]earch [S]elect Telescope')
+    keymap.set_fn('<leader>sw', builtin.grep_string, '[S]earch current [W]ord')
+    keymap.set_fn('<leader>sm', builtin.marks, '[S]earch [M]arks')
+    keymap.set_fn('<leader>sg', builtin.live_grep, '[S]earch by [G]rep')
+    keymap.set_fn('<leader>sd', builtin.diagnostics, '[S]earch [D]iagnostics')
+    keymap.set_fn('<leader>sr', builtin.registers, '[S]earch [R]egisters')
+    keymap.set_fn('<leader>s.', builtin.oldfiles, '[S]earch Recent Files')
+    keymap.set_fn('<leader>so', builtin.vim_options, '[S]earch Neovim [O]ptions')
+    keymap.set_fn('<leader>sc', builtin.commands, '[S]earch [C]ommands')
+    keymap.set_fn('<leader>sb', builtin.buffers, '[S]earch [B]uffers')
+    keymap.set_fn('<leader><leader>', builtin.buffers, 'Search Buffers')
 
-    -- Live Grep nos arquivos abertos
-    vim.keymap.set('n', '<leader>s/', function()
-      builtin.live_grep({
-        grep_open_files = true,
-        prompt_title = 'Live Grep in Open Files',
-      })
-    end, { desc = '[S]earch [/] in Open Files' })
+    keymap.set_find_files('<leader>sf', '[S]earch [F]iles', 'Project Files')
+    keymap.set_find_files('<leader>sn', '[S]earch [N]eoVim Config Files', 'NeoVim Configuration Files', { cwd = cwd })
+    keymap.set_grep('<leader>s/', '[S]earch [/] in Open Files', 'Live Grep in Open Files', { grep_open_files = true })
 
-    -- Buscar na configuração do Neovim
-    vim.keymap.set('n', '<leader>sn', function()
-      builtin.find_files({ cwd = vim.fn.stdpath('config') })
-    end, { desc = '[S]earch [N]eovim files' })
+    local telescope_ag = vim.api.nvim_create_augroup('telescope_ag', { clear = true })
+
+    vim.api.nvim_create_autocmd({ 'BufEnter' }, {
+      group = telescope_ag,
+      callback = function()
+        local current_cwd = vim.fn.expand('%:p:h')
+        local buf = vim.api.nvim_get_current_buf()
+
+        keymap.set_find_files(
+          '<leader>sF',
+          '[S]earch Current [F]ile Path',
+          'Current Directory Files',
+          { cwd = current_cwd },
+          'n',
+          buf
+        )
+      end,
+    })
 
     -- }}}
   end,

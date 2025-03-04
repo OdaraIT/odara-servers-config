@@ -17,6 +17,17 @@ return {
 
   -- }}}
 
+  -- AI {{{
+
+  -- NOTE:   Integração oficial do GitHub Copilot para Neovim.
+  --   Sugestões de código em tempo real baseadas em IA.
+  --   Suporte a múltiplas linguagens e contexto inteligente.
+  --   Configuração simples via `.vimrc` ou `init.lua`.
+  --   Repositório: https://github.com/github/copilot.vim
+  copilot_vim = false,
+
+  -- }}}
+
   -- UI {{{
 
   -- NOTE:  Tela inicial altamente customizável para o Neovim.
@@ -425,17 +436,6 @@ return {
   --  Leve, rápido e integrado ao Neovim sem dependências externas.
   --  Repositório: https://github.com/lewis6991/gitsigns.nvim
   gitsigns_nvim = true,
-
-  -- }}}
-
-  -- Files {{{
-
-  -- NOTE:   Plugin leve e rápido para detecção de tipos de arquivo no Neovim.
-  --   Substitui o sistema nativo, tornando a inicialização mais veloz.
-  --   Suporte a configuração personalizada de associações de tipos de arquivo.
-  --   Compatível com padrões globais e detecção baseada no conteúdo do arquivo.
-  --   Repositório: https://github.com/nathom/filetype.nvim
-  filetype_nvim = true,
 
   -- }}}
 

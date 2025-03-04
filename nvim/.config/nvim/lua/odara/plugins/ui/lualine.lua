@@ -6,7 +6,7 @@ return {
   --  Repositório: https://github.com/nvim-lualine/lualine.nvim
   'nvim-lualine/lualine.nvim',
 
-  enabled = vim.g.odara.plugins.lualine_nvim or false,
+  enabled = vim.g.odara.plugins.lualine_nvim and vim.g.odara.plugins.noice_nvim,
 
   dependencies = {
     -- NOTE:  Ícones para arquivos e diretórios no Neovim.
@@ -105,23 +105,26 @@ return {
       lazy_status_color = '#fab387'
     end
 
+    local noice = require('noice')
+
     setup.sections = {
       lualine_a = { 'mode' },
       lualine_b = { 'branch', 'diff', 'diagnostics' },
       lualine_c = { 'filename' },
       lualine_x = {
         {
-          'rest',
-          icon = '',
+          noice.api.statusline.mode.get,
+          cond = noice.api.statusline.mode.has,
+          color = { fg = '#ff9e64' },
         },
         {
           lazy_status.updates,
           cond = lazy_status.has_updates,
           color = { fg = lazy_status_color },
         },
-        { 'encoding' },
-        { 'fileformat' },
-        { 'filetype' },
+        'encoding',
+        'fileformat',
+        'filetype',
       },
       lualine_y = { 'progress' },
       lualine_z = { 'location' },
