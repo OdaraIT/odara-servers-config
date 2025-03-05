@@ -28,6 +28,31 @@ return {
 
   -- }}}
 
+  -- Tests {{{
+
+  -- NOTE:   Framework para executar testes diretamente do Neovim.
+  --   Suporte a diversas linguagens e frameworks de teste.
+  --   Integra-se com terminais, Tmux, Neovim jobs e mais.
+  --   Comandos fáceis para rodar testes de arquivo, linha ou suíte completa.
+  --   Repositório: https://github.com/vim-test/vim-test
+  vim_test = false,
+
+  -- NOTE:   Framework de testes modular para Neovim.
+  --   Suporte a múltiplas linguagens e frameworks de teste.
+  --   Integra-se com Treesitter, LSP e interfaces personalizadas.
+  --   Permite execução assíncrona e exibição detalhada de resultados.
+  --   Repositório: https://github.com/nvim-neotest/neotest
+  neotest = true,
+
+  -- NOTE:   Adaptador do Neotest para testes em Go.
+  --   Permite executar, depurar e visualizar testes de Go diretamente no Neovim.
+  --   Integra-se com `go test` e suporta execução assíncrona.
+  --   Compatível com `neotest`, oferecendo feedback detalhado sobre testes.
+  --   Repositório: https://github.com/nvim-neotest/neotest-go
+  neotest_go = true,
+
+  -- }}}
+
   -- UI {{{
 
   -- NOTE:  Tela inicial altamente customizável para o Neovim.
@@ -593,6 +618,13 @@ return {
   --  Leve e sem impacto no desempenho do Neovim.
   --  Repositório: https://github.com/christoomey/vim-tmux-navigator
   vim_tmux_navigator = false,
+
+  -- NOTE:   Plugin para interação entre Neovim/Vim e tmux.
+  --   Permite enviar comandos do editor para um painel do tmux.
+  --   Suporte a execução assíncrona de scripts e testes.
+  --   Atalhos configuráveis para envio rápido de comandos ao tmux.
+  --   Repositório: https://github.com/preservim/vimux
+  vimux = false,
 
   -- }}}
 

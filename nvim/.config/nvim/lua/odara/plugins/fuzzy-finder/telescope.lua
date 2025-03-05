@@ -121,13 +121,14 @@ return {
     keymap.set_fn('<leader>sd', builtin.diagnostics, '[S]earch [D]iagnostics')
     keymap.set_fn('<leader>sr', builtin.registers, '[S]earch [R]egisters')
     keymap.set_fn('<leader>s.', builtin.oldfiles, '[S]earch Recent Files')
-    keymap.set_fn('<leader>so', builtin.vim_options, '[S]earch Neovim [O]ptions')
+    keymap.set_fn('<leader>sv', builtin.vim_options, '[S]earch NeoVim [O]ptions')
     keymap.set_fn('<leader>sc', builtin.commands, '[S]earch [C]ommands')
     keymap.set_fn('<leader>sb', builtin.buffers, '[S]earch [B]uffers')
     keymap.set_fn('<leader><leader>', builtin.buffers, 'Search Buffers')
 
     keymap.set_find_files('<leader>sf', '[S]earch [F]iles', 'Project Files')
     keymap.set_find_files('<leader>sn', '[S]earch [N]eoVim Config Files', 'NeoVim Configuration Files', { cwd = cwd })
+    keymap.set_find_files('<leader>so', '[S]earch [O]mni (Root Path)', 'NeoVim Configuration Files', { cwd = '/' })
     keymap.set_grep('<leader>s/', '[S]earch [/] in Open Files', 'Live Grep in Open Files', { grep_open_files = true })
 
     local telescope_ag = vim.api.nvim_create_augroup('telescope_ag', { clear = true })
