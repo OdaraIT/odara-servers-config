@@ -28,6 +28,17 @@ return {
 
   -- }}}
 
+  -- Docs {{{
+
+  -- NOTE:   Gera automaticamente comentários de documentação no Neovim.
+  --   Suporte a múltiplas linguagens, incluindo Lua, Python, Go e mais.
+  --   Integra-se com Treesitter para análise precisa do código.
+  --   Configurável para diferentes estilos de documentação, como JSDoc e Doxygen.
+  --   Repositório: https://github.com/danymat/neogen
+  neogen = false,
+
+  -- }}}
+
   -- Tests {{{
 
   -- NOTE:   Framework para executar testes diretamente do Neovim.

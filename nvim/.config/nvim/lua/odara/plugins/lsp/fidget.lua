@@ -6,7 +6,7 @@ return {
   --  Repositório: https://github.com/j-hui/fidget.nvim
   'j-hui/fidget.nvim',
 
-  enabled = vim.g.odara.plugins.fidget_nvim or false,
+  enabled = vim.g.odara.plugins.fidget_nvim,
 
   config = function()
     require('fidget').setup({

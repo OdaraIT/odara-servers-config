@@ -6,7 +6,7 @@ return {
   --  Repositório: https://github.com/antoinemadec/FixCursorHold.nvim
   'antoinemadec/FixCursorHold.nvim',
 
-  enabled = vim.g.odara.plugins.fixcursorhold_nvim or false,
+  enabled = vim.g.odara.plugins.fixcursorhold_nvim,
 
   config = function()
     vim.g.cursorhold_updatetime = 100

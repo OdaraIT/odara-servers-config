@@ -6,7 +6,7 @@ return {
   --  Repositório: https://github.com/folke/which-key.nvim
   'folke/which-key.nvim',
 
-  enabled = vim.g.odara.plugins.which_key_nvim or false,
+  enabled = vim.g.odara.plugins.which_key_nvim,
 
   event = 'VimEnter',
 

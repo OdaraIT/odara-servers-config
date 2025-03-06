@@ -6,7 +6,7 @@ return {
   --  Repositório: https://github.com/szw/vim-maximizer
   'szw/vim-maximizer',
 
-  enabled = vim.g.odara.plugins.vim_maximizer or false,
+  enabled = vim.g.odara.plugins.vim_maximizer,
 
   keys = {
     { '<leader>sm', '<cmd>MaximizerToggle<CR>', desc = '[S]plit: [M]aximize (or Minimize)' },

@@ -6,7 +6,7 @@ return {
   --   Repositório: https://github.com/derektata/lorem.nvim
   'derektata/lorem.nvim',
 
-  enabled = vim.g.odara.plugins.lorem or false,
+  enabled = vim.g.odara.plugins.lorem,
 
   config = function()
     require('lorem').setup({

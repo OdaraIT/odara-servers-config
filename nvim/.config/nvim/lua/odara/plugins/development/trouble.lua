@@ -6,7 +6,7 @@ return {
   --  Repositório: https://github.com/folke/trouble.nvim
   'folke/trouble.nvim',
 
-  enabled = vim.g.odara.plugins.trouble_nvim or false,
+  enabled = vim.g.odara.plugins.trouble_nvim,
 
   dependencies = {
     -- NOTE:  Ícones para arquivos e diretórios no Neovim.
@@ -16,7 +16,7 @@ return {
     --  Repositório: https://github.com/nvim-tree/nvim-web-devicons
     {
       'nvim-tree/nvim-web-devicons',
-      enabled = vim.g.odara.plugins.nvim_web_devicons or false,
+      enabled = vim.g.odara.plugins.nvim_web_devicons,
     },
 
     -- NOTE: Realça e gerencia comentários como TODO, FIX, HACK e outros no código.
@@ -25,15 +25,16 @@ return {
     -- Repositório: https://github.com/folke/todo-comments.nvim
     {
       'folke/todo-comments.nvim',
-      enabled = vim.g.odara.plugins.todo_comments_nvim or false,
+      enabled = vim.g.odara.plugins.todo_comments_nvim,
     },
   },
 
-  opts = { focus = true },
+  opts = {
+    focus = true,
+  },
 
   cmd = 'Trouble',
 
-  -- FIX: Rever os keymaps e suas descrições.
   keys = {
     { '<leader>xw', '<cmd>Trouble diagnostics toggle<CR>', desc = 'Open trouble workspace diagnostics' },
     { '<leader>xd', '<cmd>Trouble diagnostics toggle filter.buf=0<CR>', desc = 'Open trouble document diagnostics' },

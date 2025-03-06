@@ -5,7 +5,9 @@ return {
   --  Repositório: https://github.com/neovim/nvim-lspconfig
   'neovim/nvim-lspconfig',
 
-  enabled = vim.g.odara.plugins.nvim_lspconfig or false,
+  enabled = vim.g.odara.plugins.nvim_lspconfig
+    and vim.g.odara.plugins.mason_nvim
+    and vim.g.odara.plugins.mason_lspconfig_nvim,
 
   dependencies = {
     -- NOTE:  Gerencia a instalação de LSPs, DAPs, linters e formatters no Neovim.
@@ -212,7 +214,7 @@ return {
 
       vim.diagnostic.config({
         signs = { text = diagnostic_signs },
-        virtual_text = false, -- Desativa os diagnósticos inline
+        virtual_text = true, -- Desativa os diagnósticos inline
         underline = false, -- Mantém o sublinhado em erros e warnings
         update_in_insert = false, -- Não atualiza diagnósticos enquanto digita
         severity_sort = true, -- Ordena os diagnósticos por severidade

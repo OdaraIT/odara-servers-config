@@ -26,7 +26,7 @@ return {
     --  Repositório: https://github.com/nvim-lualine/lualine.nvim
     {
       'nvim-lualine/lualine.nvim',
-      enabled = vim.g.odara.plugins.lualine_nvim or false,
+      enabled = vim.g.odara.plugins.lualine_nvim,
     },
 
     -- NOTE:  Fuzzy finder altamente extensível para Neovim.
@@ -36,7 +36,7 @@ return {
     --  Repositório: https://github.com/nvim-telescope/telescope.nvim
     {
       'nvim-telescope/telescope.nvim',
-      enabled = vim.g.odara.plugins.telescope_nvim or false,
+      enabled = vim.g.odara.plugins.telescope_nvim,
     },
   },
 

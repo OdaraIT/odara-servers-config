@@ -6,5 +6,5 @@ return {
   --  Repositório: https://github.com/nvim-lua/plenary.nvim
   'nvim-lua/plenary.nvim',
 
-  enabled = vim.g.odara.plugins.plenary_nvim or false,
+  enabled = vim.g.odara.plugins.plenary_nvim,
 }

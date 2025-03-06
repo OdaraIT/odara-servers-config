@@ -6,7 +6,7 @@ return {
   --  Repositório: https://github.com/numToStr/Comment.nvim
   'numToStr/Comment.nvim',
 
-  enabled = vim.g.odara.plugins.comment_nvim or false,
+  enabled = vim.g.odara.plugins.comment_nvim,
 
   event = { 'BufReadPre', 'BufNewFile' },
 
@@ -18,7 +18,7 @@ return {
     --  Repositório: https://github.com/JoosepAlviste/nvim-ts-context-commentstring
     {
       'JoosepAlviste/nvim-ts-context-commentstring',
-      enabled = vim.g.odara.plugins.nvim_ts_context_commentstring or false,
+      enabled = vim.g.odara.plugins.nvim_ts_context_commentstring,
     },
 
     -- NOTE:  Fornece parsing avançado de código-fonte usando árvores sintáticas (Tree-sitter).
@@ -28,7 +28,7 @@ return {
     --  Repositório: https://github.com/nvim-treesitter/nvim-treesitter
     {
       'nvim-treesitter/nvim-treesitter',
-      enabled = vim.g.odara.plugins.nvim_treesitter or false,
+      enabled = vim.g.odara.plugins.nvim_treesitter,
     },
   },
 

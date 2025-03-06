@@ -5,7 +5,7 @@ return {
   --  Repositório: https://github.com/folke/todo-comments.nvim
   'folke/todo-comments.nvim',
 
-  enabled = vim.g.odara.plugins.todo_comments_nvim or false,
+  enabled = vim.g.odara.plugins.todo_comments_nvim,
 
   event = { 'BufReadPre', 'BufNewFile' },
 

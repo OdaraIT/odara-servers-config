@@ -6,7 +6,7 @@ return {
   --  Repositório: https://github.com/windwp/nvim-autopairs
   'windwp/nvim-autopairs',
 
-  enabled = vim.g.odara.plugins.nvim_autopairs or false,
+  enabled = vim.g.odara.plugins.nvim_autopairs,
 
   event = { 'InsertEnter' },
 
@@ -18,7 +18,7 @@ return {
     --  Repositório: https://github.com/hrsh7th/nvim-cmp
     {
       'hrsh7th/nvim-cmp',
-      enabled = vim.g.odara.plugins.nvim_cmp or false,
+      enabled = vim.g.odara.plugins.nvim_cmp,
     },
 
     -- NOTE:  Fornece parsing avançado de código-fonte usando árvores sintáticas (Tree-sitter).
@@ -28,7 +28,7 @@ return {
     --  Repositório: https://github.com/nvim-treesitter/nvim-treesitter
     {
       'nvim-treesitter/nvim-treesitter',
-      enabled = vim.g.odara.plugins.nvim_treesitter or false,
+      enabled = vim.g.odara.plugins.nvim_treesitter,
     },
   },
   config = function()

@@ -6,7 +6,7 @@ return {
   --  Repositório: https://github.com/akinsho/bufferline.nvim
   'akinsho/bufferline.nvim',
 
-  enabled = vim.g.odara.plugins.bufferline_nvim or false,
+  enabled = vim.g.odara.plugins.bufferline_nvim,
 
   dependencies = {
     -- NOTE:  Ícones para arquivos e diretórios no Neovim.
@@ -16,7 +16,7 @@ return {
     --  Repositório: https://github.com/nvim-tree/nvim-web-devicons
     {
       'nvim-tree/nvim-web-devicons',
-      enabled = vim.g.odara.plugins.nvim_web_devicons or false,
+      enabled = vim.g.odara.plugins.nvim_web_devicons,
     },
   },
 

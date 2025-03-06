@@ -6,7 +6,7 @@ return {
   --  Repositório: https://github.com/nguyenvukhang/nvim-toggler
   'nguyenvukhang/nvim-toggler',
 
-  enabled = vim.g.odara.plugins.nvim_toggler or false,
+  enabled = vim.g.odara.plugins.nvim_toggler,
 
   config = function()
     local toggler = require('nvim-toggler')
@@ -25,12 +25,6 @@ return {
       autoselect_longest_match = false,
     })
 
-    vim.keymap.set(
-      { 'n', 'v' },
-      'tt',
-      toggler.toggle,
-      { desc = '[T]oggle [T]rue or False and other booleans formats.' }
-    )
+    vim.keymap.set({ 'n', 'v' }, 'tt', toggler.toggle, { desc = '[T]oggle [T]rue and other booleans formats.' })
   end,
 }
-
