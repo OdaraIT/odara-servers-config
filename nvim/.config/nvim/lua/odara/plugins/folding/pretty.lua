@@ -6,7 +6,7 @@ return {
   --  Repositório: https://github.com/anuvyklack/pretty-fold.nvim
   'anuvyklack/pretty-fold.nvim',
 
-  enabled = vim.g.odara.plugins.pretty_fold_nvim or false,
+  enabled = vim.g.odara.plugins.pretty_fold_nvim,
 
   dependencies = {
     -- NOTE:  Plugin avançado de folding para Neovim.
@@ -16,7 +16,7 @@ return {
     --  Repositório: https://github.com/kevinhwang91/nvim-ufo
     {
       'kevinhwang91/nvim-ufo',
-      enabled = vim.g.odara.plugins.nvim_ufo or false,
+      enabled = vim.g.odara.plugins.nvim_ufo,
     },
   },
 
@@ -42,7 +42,6 @@ return {
 
       remove_fold_markers = true,
 
-      -- Keep the indentation of the content of the fold string.
       keep_indentation = true,
 
       -- Possible values:
@@ -59,7 +58,7 @@ return {
         '@brief%s*', -- (for C++) Remove '@brief' and all spaces after.
       },
 
-      add_close_pattern = true, -- true, 'last_line' or false
+      add_close_pattern = true, -- true, 'last_line'
 
       matchup_patterns = {
         { '{', '}' },

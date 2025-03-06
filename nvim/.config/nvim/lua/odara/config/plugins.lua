@@ -359,7 +359,7 @@ return {
 
   -- }}}
 
-  -- Custom Text Motions {{{
+  -- Text Objects {{{
 
   -- NOTE:  Insere automaticamente pares de caracteres como parênteses e aspas no Neovim.
   --  Suporte a múltiplas linguagens com integração ao Treesitter.
@@ -381,12 +381,22 @@ return {
   --  Repositório: https://github.com/kylechui/nvim-surround
   nvim_surround = true,
 
+  -- }}}
+  -- Text Objects {{{
+
   -- NOTE:  Fornece text-objects avançados baseados em Tree-sitter no Neovim.
   --  Permite seleção, movimentação e manipulação precisa de blocos de código.
   --  Suporte a linguagens múltiplas e integração com motions personalizados.
   --  Extensível e compatível com nvim-treesitter para melhor precisão.
   --  Repositório: https://github.com/nvim-treesitter/nvim-treesitter-textobjects
   nvim_treesitter_textobjects = false,
+
+  -- NOTE:   Melhorias em seleções textuais baseadas em padrões inteligentes no Neovim.
+  --   Fornece objetos de texto avançados para manipulação eficiente.
+  --   Suporte a seleções contextuais em funções, argumentos, blocos e mais.
+  --   Leve, sem dependências e altamente configurável via Lua.
+  --   Repositório: https://github.com/echasnovski/mini.ai
+  mini_ai = true,
 
   -- }}}
 

@@ -6,7 +6,7 @@ return {
   --  Repositório: https://github.com/anuvyklack/fold-preview.nvim
   'anuvyklack/fold-preview.nvim',
 
-  enabled = false,
+  enabled = vim.g.odara.plugins.fold_preview_nvim,
 
   dependencies = {
     -- NOTE:  Plugin para modificar e estender mapeamentos de teclas no Neovim.
@@ -26,7 +26,7 @@ return {
     --  Repositório: https://github.com/kevinhwang91/nvim-ufo
     {
       'kevinhwang91/nvim-ufo',
-      enabled = vim.g.odara.plugins.nvim_ufo or false,
+      enabled = vim.g.odara.plugins.nvim_ufo,
     },
   },
 

@@ -7,7 +7,8 @@ return {
 
   enabled = vim.g.odara.plugins.nvim_lspconfig
     and vim.g.odara.plugins.mason_nvim
-    and vim.g.odara.plugins.mason_lspconfig_nvim,
+    and vim.g.odara.plugins.mason_lspconfig_nvim
+    and vim.g.odara.plugins.nvim_ufo,
 
   dependencies = {
     -- NOTE:  Gerencia a instalação de LSPs, DAPs, linters e formatters no Neovim.
@@ -27,6 +28,16 @@ return {
       'williamboman/mason-lspconfig.nvim',
       enabled = true,
     },
+
+    -- NOTE:  Plugin avançado de folding para Neovim.
+    --  Suporte a LSP, Treesitter e indentação para um folding mais preciso.
+    --  Permite abrir e fechar folds de forma eficiente com atalhos personalizados.
+    --  Integração com Lualine e pré-visualização de código dobrado.
+    --  Repositório: https://github.com/kevinhwang91/nvim-ufo
+    {
+      'kevinhwang91/nvim-ufo',
+      enabled = true,
+    },
   },
   config = function()
     local lspconfig = require('lspconfig')
@@ -40,6 +51,11 @@ return {
     local capabilities = vim.lsp.protocol.make_client_capabilities()
 
     capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
+
+    capabilities.textDocument.foldingRange = {
+      dynamicRegistration = false,
+      lineFoldingOnly = true,
+    }
 
     local flags = {
       debounce_text_changes = 150,

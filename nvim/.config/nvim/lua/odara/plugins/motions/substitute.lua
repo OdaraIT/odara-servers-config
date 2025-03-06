@@ -5,7 +5,7 @@ return {
   --  Repositório: https://github.com/gbprod/substitute.nvim
   'gbprod/substitute.nvim',
 
-  enabled = vim.g.odara.plugins.substitute_nvim or false,
+  enabled = vim.g.odara.plugins.substitute_nvim,
 
   event = { 'BufReadPre', 'BufNewFile' },
 

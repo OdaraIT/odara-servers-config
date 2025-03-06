@@ -6,7 +6,7 @@ return {
   --  Repositório: https://github.com/kylechui/nvim-surround
   'kylechui/nvim-surround',
 
-  enabled = vim.g.odara.plugins.nvim_surround or false,
+  enabled = vim.g.odara.plugins.nvim_surround,
 
   event = { 'BufReadPre', 'BufNewFile' },
 
