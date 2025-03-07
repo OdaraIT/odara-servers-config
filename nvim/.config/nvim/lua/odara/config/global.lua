@@ -16,7 +16,7 @@ return {
   skip_none_ls = false,
   has_nerd_font = true,
   linters = {
-    enable_phpstan = true,
+    enable_phpstan = false,
     enable_phpcs = false,
     enable_phpmd = false,
   },

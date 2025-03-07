@@ -60,7 +60,7 @@ return {
         bash = { 'shfmt' },
         zsh = { 'shfmt' },
         systemd = { 'systemd_analyze' },
-        php = { 'php_cs_fixer' },
+        php = { 'intelephense' },
         toml = { 'taplo' },
         http = { 'jq' },
       },
