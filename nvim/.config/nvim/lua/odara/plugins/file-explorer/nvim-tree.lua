@@ -43,7 +43,7 @@ return {
 
       view = {
         width = 60,
-        relativenumber = true,
+        relativenumber = false,
         cursorline = true,
         preserve_window_proportions = true,
       },
