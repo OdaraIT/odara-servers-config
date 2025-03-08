@@ -6,7 +6,9 @@ return {
   --  Repositório: https://github.com/nvim-lualine/lualine.nvim
   'nvim-lualine/lualine.nvim',
 
-  enabled = vim.g.odara.plugins.lualine_nvim and vim.g.odara.plugins.noice_nvim,
+  enabled = vim.g.odara.plugins.lualine_nvim
+    and vim.g.odara.plugins.noice_nvim
+    and vim.g.odara.plugins.nvim_web_devicons,
 
   dependencies = {
     -- NOTE:  Ícones para arquivos e diretórios no Neovim.
@@ -16,7 +18,7 @@ return {
     --  Repositório: https://github.com/nvim-tree/nvim-web-devicons
     {
       'nvim-tree/nvim-web-devicons',
-      enabled = vim.g.odara.plugins.nvim_web_devicons or false,
+      enabled = true,
     },
 
     -- NOTE:  Tema moderno e vibrante para Neovim com suporte a LSP e Treesitter.
@@ -26,7 +28,7 @@ return {
     --  Repositório: https://github.com/folke/tokyonight.nvim
     {
       'folke/tokyonight.nvim',
-      enabled = vim.g.odara.plugins.tokyonight_nvim or false,
+      enabled = vim.g.odara.plugins.tokyonight_nvim,
     },
 
     -- NOTE:   Tema elegante e altamente personalizável para Neovim.
@@ -36,7 +38,7 @@ return {
     --   Repositório: https://github.com/catppuccin/nvim
     {
       'catppuccin/nvim',
-      enabled = vim.g.odara.plugins.catppuccin_nvim or false,
+      enabled = vim.g.odara.plugins.catppuccin_nvim,
     },
   },
 
@@ -124,7 +126,18 @@ return {
         },
         'encoding',
         'fileformat',
-        'filetype',
+        {
+          'filetype',
+          icon = function()
+            local ftype = vim.bo.filetype
+
+            if ftype == 'vim' and vim.fn.expand('%:t') == 'vifmrc' then
+              return ''
+            else
+              return require('nvim-web-devicons').get_icon_by_filetype(ftype, { default = true })
+            end
+          end,
+        },
       },
       lualine_y = { 'progress' },
       lualine_z = { 'location' },

@@ -112,7 +112,14 @@ return {
         timeout = 10000,
       },
     })
-
+    require('nvim-web-devicons').set_icon({
+      vifmrc = {
+        icon = '', -- Ícone personalizado
+        color = '#FFA500',
+        cterm_color = '214',
+        name = 'Vifmrc',
+      },
+    })
     local keymap = vim.keymap
 
     keymap.set('n', '<leader>ee', '<cmd>NvimTreeToggle<CR>', { desc = 'Toggle File [E]xplor[e]r' })

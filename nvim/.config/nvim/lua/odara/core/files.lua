@@ -1,6 +1,7 @@
 vim.filetype.add({
   extension = {
     nginx = 'nginx',
+    vifm = 'vim',
   },
 
   filename = {
@@ -12,5 +13,6 @@ vim.filetype.add({
     ['.bash_profile'] = 'bash',
     ['.taskrc'] = 'ini',
     ['taskrc'] = 'ini',
+    ['vifmrc'] = 'vim',
   },
 })
