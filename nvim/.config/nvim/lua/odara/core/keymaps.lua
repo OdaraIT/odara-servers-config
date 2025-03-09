@@ -1,7 +1,58 @@
+vim.api.nvim_create_autocmd('User', {
+  pattern = 'LazyDone',
+  callback = function()
+    local wk = require('which-key')
+
+    -- Remote Sync (FTP & SFTP) {{{
+    -- transfer.nvim {{{
+
+    if vim.g.odara.plugins.transfer_nvim and vim.g.odara.global.remote_server.enabled then
+      wk.add({
+        { '<leader>rs', group = 'Remote Server (Upload or Download)', icon = '' },
+        {
+          '<leader>rsd',
+          '<cmd>TransferDownload<cr>',
+          desc = '[R]emote [S]erver: [D]ownload',
+          icon = { color = 'green', icon = '󰇚' },
+        },
+        {
+          '<leader>rsf',
+          '<cmd>DiffRemote<cr>',
+          desc = '[R]emote [S]erver: Di[f]f',
+          icon = { color = 'green', icon = '' },
+        },
+        {
+          '<leader>rsi',
+          '<cmd>TransferInit<cr>',
+          desc = '[R]emote [S]erver: [I]nit/Edit Deployment Config',
+          icon = { color = 'green', icon = '' },
+        },
+        {
+          '<leader>rsr',
+          '<cmd>TransferRepeat<cr>',
+          desc = '[R]emote [S]erver: [R]epeat Transfer Command',
+          icon = { color = 'green', icon = '󰑖' },
+        },
+        {
+          '<leader>rsu',
+          '<cmd>TransferUpload<cr>',
+          desc = '[R]emote [S]erver: [U]pload',
+          icon = { color = 'green', icon = '󰕒' },
+        },
+      })
+    end
+
+    -- }}}
+    -- }}}
+  end,
+})
+
 -- General Keymaps -------------------
 vim.keymap.set('i', 'jk', '<ESC>', { desc = 'Exit insert mode with jk' })
 vim.keymap.set('i', 'jj', '<ESC>', { desc = 'Exit insert mode with jj' })
 vim.keymap.set('i', 'kk', '<ESC>', { desc = 'Exit insert mode with kk' })
+vim.keymap.set('i', 'hh', '<ESC>', { desc = 'Exit insert mode with hh' })
+vim.keymap.set('i', 'll', '<ESC>', { desc = 'Exit insert mode with ll' })
 vim.keymap.set('i', ':w', '<ESC>:w<CR>', { desc = 'Exit insert and save' })
 
 -- clear search highlights

@@ -145,6 +145,17 @@ return {
 
   -- }}}
 
+  -- Remote Sync (FTP & SFTP) {{{
+
+  -- NOTE:  Plugin para transferir texto, arquivos e buffers no Neovim.
+  --  Suporte a compartilhamento via pastebin, 0x0, FTP, SFTP e outros serviços.
+  --  Facilita a troca rápida de conteúdos entre dispositivos e colaboradores.
+  --  Configurável, permitindo escolher serviços e opções de upload.
+  --  Repositório: https://github.com/coffebar/transfer.nvim
+  transfer_nvim = true,
+
+  -- }}}
+
   -- Bookmarks {{{
 
   -- NOTE:   Gerenciador de bookmarks simples e eficiente para Neovim.

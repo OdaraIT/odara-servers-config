@@ -1,5 +1,5 @@
 local project_root = vim.fn.getcwd()
-local config_file = project_root .. '/.nvim.lua'
+local config_file = project_root .. '/.nvim/config.lua'
 local local_config = {}
 
 if vim.fn.filereadable(config_file) == 1 then
@@ -28,8 +28,12 @@ else
   config.global.is_servers = false
 end
 
-config = vim.tbl_deep_extend('force', config, servers_config, local_config)
+local deployment_config_file = project_root .. '/.nvim/deployment.lua'
 
-print(config.global.files.hidden_files)
+if vim.fn.filereadable(deployment_config_file) == 1 then
+  config.global.remote_server.enabled = true
+end
+
+config = vim.tbl_deep_extend('force', config, servers_config, local_config)
 
 vim.g.odara = config

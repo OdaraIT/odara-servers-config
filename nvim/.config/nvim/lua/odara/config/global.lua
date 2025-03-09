@@ -12,18 +12,32 @@ return {
     tree_ignore_patterns = require('odara.config.defaults.ignore-patters-tree'),
   },
 
+  remote_server = {
+    enabled = false,
+  },
+
+  project = {
+    is_default = true,
+    is_main = false,
+    is_php_yii = false,
+    is_php_wordpress = false,
+  },
+
   skip_lsp = false,
   skip_none_ls = false,
   has_nerd_font = true,
+
   linters = {
     enable_phpstan = false,
     enable_phpcs = false,
     enable_phpmd = false,
   },
+
   fonts = {
     nerd_font_available = true,
     nerd_font = 'JetBrains Mono Nerd Font',
   },
+
   binaries = {
     python_path = os.getenv('ODARA_PYTHON_PATH') or '/home/linuxbrew/.linuxbrew/bin/python3',
   },
