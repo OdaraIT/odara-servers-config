@@ -23,6 +23,10 @@ return {
     is_php_wordpress = false,
   },
 
+  tasks = {
+    enabled = false,
+  },
+
   skip_lsp = false,
   skip_none_ls = false,
   has_nerd_font = true,

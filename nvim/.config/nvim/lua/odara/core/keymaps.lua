@@ -54,6 +54,7 @@ vim.keymap.set('i', 'kk', '<ESC>', { desc = 'Exit insert mode with kk' })
 vim.keymap.set('i', 'hh', '<ESC>', { desc = 'Exit insert mode with hh' })
 vim.keymap.set('i', 'll', '<ESC>', { desc = 'Exit insert mode with ll' })
 vim.keymap.set('i', ':w', '<ESC>:w<CR>', { desc = 'Exit insert and save' })
+vim.keymap.set('i', ':W', '<ESC>:w<CR>', { desc = 'Exit insert and save' })
 
 -- clear search highlights
 vim.keymap.set('n', '<leader>nh', ':nohl<CR>', { desc = 'Clear search highlights' })

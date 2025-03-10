@@ -382,9 +382,16 @@ return {
   --   Repositório: https://github.com/derektata/lorem.nvim
   lorem = false,
 
+  -- NOTE:  Suporte avançado a Markdown no Neovim.
+  --  Realce de sintaxe, dobramento e atalhos para edição eficiente.
+  --  Facilita a escrita e organização de documentos em Markdown.
+  --  Configurável, com suporte a tabelas, listas e pré-visualização.
+  --  Repositório: https://github.com/plasticboy/vim-markdown
+  vim_markdown = true,
+
   -- }}}
 
-  -- Text Objects {{{
+  -- Motions {{{
 
   -- NOTE:  Insere automaticamente pares de caracteres como parênteses e aspas no Neovim.
   --  Suporte a múltiplas linguagens com integração ao Treesitter.
@@ -407,6 +414,7 @@ return {
   nvim_surround = true,
 
   -- }}}
+
   -- Text Objects {{{
 
   -- NOTE:  Fornece text-objects avançados baseados em Tree-sitter no Neovim.
@@ -635,6 +643,20 @@ return {
   -- }}}
 
   -- Tasks {{{
+
+  -- NOTE:  Sistema de wiki pessoal no Neovim.
+  --  Suporte a links, tabelas, diário e múltiplos formatos de markdown.
+  --  Facilita a organização de notas, documentos e planejamento de projetos.
+  --  Altamente configurável, com opções de sincronização e exportação.
+  --  Repositório: https://github.com/vimwiki/vimwiki
+  vimwiki = true,
+
+  -- NOTE:  Integra o Taskwarrior ao VimWiki no Neovim.
+  --  Permite gerenciar tarefas diretamente dentro de páginas do VimWiki.
+  --  Facilita o acompanhamento de prazos, prioridades e projetos.
+  --  Configurável, com suporte a filtros, comandos personalizados e sincronização.
+  --  Repositório: https://github.com/tbabej/taskwiki
+  taskwiki = true,
 
   -- NOTE:   Gerenciador de tarefas assíncronas para Neovim.
   --   Executa, monitora e gerencia comandos e processos dentro do editor.

@@ -28,10 +28,18 @@ else
   config.global.is_servers = false
 end
 
+-- NOTE: Per project deployment configuration
 local deployment_config_file = project_root .. '/.nvim/deployment.lua'
 
 if vim.fn.filereadable(deployment_config_file) == 1 then
   config.global.remote_server.enabled = true
+end
+
+-- NOTE: Per project TaskWiki and TaskWarrior integration
+local tasks_config_file = project_root .. '/projects/project.md'
+
+if vim.fn.filereadable(tasks_config_file) == 1 then
+  config.global.tasks.enabled = true
 end
 
 config = vim.tbl_deep_extend('force', config, servers_config, local_config)
