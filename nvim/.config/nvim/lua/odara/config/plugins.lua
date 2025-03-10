@@ -19,12 +19,26 @@ return {
 
   -- AI {{{
 
+  -- NOTE: ﮩ Integração do ChatGPT com o Neovim.
+  --  Permite gerar, completar e refatorar código diretamente no editor.
+  --  Auxilia no desenvolvimento com respostas inteligentes e contextuais.
+  --  Configurável, com suporte a comandos personalizados e atalhos.
+  --  Repositório: https://github.com/jackMort/ChatGPT.nvim
+  chatgpt_nvim = false,
+
   -- NOTE:   Integração oficial do GitHub Copilot para Neovim.
   --   Sugestões de código em tempo real baseadas em IA.
   --   Suporte a múltiplas linguagens e contexto inteligente.
   --   Configuração simples via `.vimrc` ou `init.lua`.
   --   Repositório: https://github.com/github/copilot.vim
   copilot_vim = false,
+
+  -- NOTE:  Autocompletar código com IA no Neovim.
+  --  Sugestões em tempo real para diversas linguagens de programação.
+  --  Acelera o desenvolvimento com previsões contextuais e inteligentes.
+  --  Configurável, com suporte a atalhos e preferências personalizadas.
+  --  Repositório: https://github.com/Exafunction/codeium.vim
+  codeium_vim = true,
 
   -- }}}
 

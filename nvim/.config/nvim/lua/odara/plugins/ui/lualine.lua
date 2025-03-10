@@ -10,6 +10,8 @@ return {
     and vim.g.odara.plugins.noice_nvim
     and vim.g.odara.plugins.nvim_web_devicons,
 
+  -- Dependencies {{{
+
   dependencies = {
     -- NOTE:  Ícones para arquivos e diretórios no Neovim.
     --  Integra-se com plugins como nvim-tree, telescope e lualine.
@@ -41,6 +43,8 @@ return {
       enabled = vim.g.odara.plugins.catppuccin_nvim,
     },
   },
+
+  -- }}}
 
   config = function()
     local lualine = require('lualine')
