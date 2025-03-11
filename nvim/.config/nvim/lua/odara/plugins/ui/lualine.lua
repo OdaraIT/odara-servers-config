@@ -42,6 +42,16 @@ return {
       'catppuccin/nvim',
       enabled = vim.g.odara.plugins.catppuccin_nvim,
     },
+
+    -- NOTE:  Exibe o status do GitHub Copilot na Lualine.
+    --  Indica se o Copilot está ativo e funcionando no Neovim.
+    --  Ajuda a visualizar o estado da IA sem sair do fluxo de trabalho.
+    --  Configurável, permitindo ajustar a exibição conforme a necessidade.
+    --  Repositório: https://github.com/AndreM222/copilot-lualine
+    {
+      'AndreM222/copilot-lualine',
+      enabled = vim.g.odara.plugins.copilot_lualine,
+    },
   },
 
   -- }}}
@@ -127,6 +137,21 @@ return {
           lazy_status.updates,
           cond = lazy_status.has_updates,
           color = { fg = lazy_status_color },
+        },
+        {
+          'copilot',
+          symbols = {
+            status = {
+              icons = {
+                enabled = ' ',
+                disabled = ' ',
+                warning = '',
+                error = '',
+                loading = ' ',
+              },
+            },
+          },
+          show_colors = true,
         },
         'encoding',
         'fileformat',

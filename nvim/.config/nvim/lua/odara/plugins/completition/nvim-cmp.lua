@@ -6,9 +6,11 @@ return {
   --  Repositório: https://github.com/hrsh7th/nvim-cmp
   'hrsh7th/nvim-cmp',
 
-  enabled = vim.g.odara.plugins.nvim_cmp or false,
+  enabled = vim.g.odara.plugins.nvim_cmp,
 
   event = 'InsertEnter',
+
+  -- Dependencies {{{
 
   dependencies = {
     -- NOTE:  Fonte de autocompletar para palavras do buffer no nvim-cmp.
@@ -48,7 +50,7 @@ return {
     --  Repositório: https://github.com/hrsh7th/cmp-nvim-lsp
     {
       'hrsh7th/cmp-nvim-lsp',
-      enabled = vim.g.odara.plugins.cmp_nvim_lsp or false,
+      enabled = vim.g.odara.plugins.cmp_nvim_lsp,
     },
 
     -- NOTE:  Fonte de autocompletar para LuaSnip no nvim-cmp.
@@ -58,7 +60,7 @@ return {
     --  Repositório: https://github.com/saadparwaiz1/cmp_luasnip
     {
       'saadparwaiz1/cmp_luasnip',
-      enabled = vim.g.odara.plugins.cmp_luasnip or false,
+      enabled = vim.g.odara.plugins.cmp_luasnip,
     },
 
     -- NOTE:  Adiciona ícones aos menus de autocompletar do nvim-cmp.
@@ -68,9 +70,21 @@ return {
     --  Repositório: https://github.com/onsails/lspkind.nvim
     {
       'onsails/lspkind.nvim',
-      enabled = vim.g.odara.plugins.lspkind_nvim or false,
+      enabled = vim.g.odara.plugins.lspkind_nvim,
+    },
+
+    {
+      -- NOTE:  Integra o GitHub Copilot ao nvim-cmp.
+      --  Permite usar sugestões do Copilot como fonte de autocomplete.
+      --  Melhora a experiência de código com previsões mais naturais e fluídas.
+      --  Totalmente configurável, com suporte a prioridades e ajustes finos.
+      --  Repositório: https://github.com/zbirenbaum/copilot-cmp
+      'zbirenbaum/copilot-cmp',
+      enabled = vim.g.odara.plugins.copilot_cmp,
     },
   },
+
+  -- }}}
 
   config = function()
     local cmp = require('cmp')
@@ -92,6 +106,8 @@ return {
         ['<C-Space>'] = cmp.mapping.complete(),
         ['<C-e>'] = cmp.mapping.abort(),
         ['<CR>'] = cmp.mapping.confirm({ select = false }),
+        ['<Tab>'] = nil,
+        ['<S-Tab>'] = nil,
       }),
     }
 
@@ -142,6 +158,10 @@ return {
           },
         },
       })
+    end
+
+    if vim.g.odara.plugins.copilot_cmp then
+      table.insert(sources, { name = 'copilot' })
     end
 
     table.insert(sources, { name = 'nvim_lsp' })

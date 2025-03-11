@@ -36,6 +36,10 @@ return {
   config = function()
     local project_root = vim.fn.getcwd()
 
+    vim.g.vimwiki_global_ext = 0
+    vim.g.vimwiki_auto_chdir = 1
+    vim.g.vimwiki_key_mappings = { global = 0 }
+
     vim.g.vimwiki_list = {
       {
         path = project_root .. '/projects',
@@ -50,8 +54,6 @@ return {
       ['.mdown'] = 'markdown',
     }
 
-    vim.g.vimwiki_global_ext = 0
-    vim.g.vimwiki_auto_chdir = 1
     vim.g.taskwiki_list = {
       {
         path = project_root .. '/projects',
@@ -61,6 +63,7 @@ return {
     }
 
     vim.g.taskwiki_markdown_syntax = 'markdown'
+
     vim.g.markdown_folding = 1
   end,
 }

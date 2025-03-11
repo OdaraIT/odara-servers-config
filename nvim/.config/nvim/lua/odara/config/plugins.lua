@@ -24,21 +24,21 @@ return {
   --  Auxilia no desenvolvimento com respostas inteligentes e contextuais.
   --  Configurável, com suporte a comandos personalizados e atalhos.
   --  Repositório: https://github.com/jackMort/ChatGPT.nvim
-  chatgpt_nvim = false,
+  chatgpt_nvim = true,
 
-  -- NOTE:   Integração oficial do GitHub Copilot para Neovim.
-  --   Sugestões de código em tempo real baseadas em IA.
-  --   Suporte a múltiplas linguagens e contexto inteligente.
-  --   Configuração simples via `.vimrc` ou `init.lua`.
-  --   Repositório: https://github.com/github/copilot.vim
-  copilot_vim = false,
+  -- NOTE:  Configuração avançada do GitHub Copilot para Neovim.
+  --  Fornece controle granular sobre comportamento e atalhos do Copilot.
+  --  Permite ativar/desativar sugestões por buffer ou modo de inserção.
+  --  Integrável com plugins como nvim-cmp para uma experiência personalizada.
+  --  Repositório: https://github.com/zbirenbaum/copilot.lua
+  copilot_lua = true,
 
   -- NOTE:  Autocompletar código com IA no Neovim.
   --  Sugestões em tempo real para diversas linguagens de programação.
   --  Acelera o desenvolvimento com previsões contextuais e inteligentes.
   --  Configurável, com suporte a atalhos e preferências personalizadas.
   --  Repositório: https://github.com/Exafunction/codeium.vim
-  codeium_vim = true,
+  codeium_vim = false,
 
   -- }}}
 
@@ -121,6 +121,13 @@ return {
   --  Fácil de configurar e compatível com nvim-web-devicons.
   --  Repositório: https://github.com/nvim-lualine/lualine.nvim
   lualine_nvim = true,
+
+  -- NOTE:  Exibe o status do GitHub Copilot na Lualine.
+  --  Indica se o Copilot está ativo e funcionando no Neovim.
+  --  Ajuda a visualizar o estado da IA sem sair do fluxo de trabalho.
+  --  Configurável, permitindo ajustar a exibição conforme a necessidade.
+  --  Repositório: https://github.com/AndreM222/copilot-lualine
+  copilot_lualine = true,
 
   -- NOTE:  Melhora a experiência com mensagens, comandos e LSP no Neovim.
   --  Substitui `:messages`, entrada de comandos e UI de notificações.
@@ -297,6 +304,13 @@ return {
   --  Leve, eficiente e fácil de integrar com nvim-cmp.
   --  Repositório: https://github.com/onsails/lspkind.nvim
   lspkind_nvim = true,
+
+  -- NOTE:  Integra o GitHub Copilot ao nvim-cmp.
+  --  Permite usar sugestões do Copilot como fonte de autocomplete.
+  --  Melhora a experiência de código com previsões mais naturais e fluídas.
+  --  Totalmente configurável, com suporte a prioridades e ajustes finos.
+  --  Repositório: https://github.com/zbirenbaum/copilot-cmp
+  copilot_cmp = true,
 
   -- }}}
 

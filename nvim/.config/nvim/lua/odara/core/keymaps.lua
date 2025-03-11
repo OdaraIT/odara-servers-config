@@ -44,6 +44,138 @@ vim.api.nvim_create_autocmd('User', {
 
     -- }}}
     -- }}}
+
+    -- Tasks {{{
+
+    vim.api.nvim_create_autocmd('FileType', {
+      pattern = 'vimwiki',
+      callback = function()
+        -- VimWiki {{{
+
+        wk.add({
+          { '<leader>vw', group = 'VimWiki', icon = '' },
+          {
+            '<leader>vwc',
+            '<cmd>VimwikiToggleListItem<CR>',
+            desc = 'Toggle Task (Complete/Incomplete)',
+            icon = { color = 'blue', icon = '' },
+          },
+          {
+            '<leader>vwt',
+            '<cmd>VimwikiToggleCheckbox<CR>',
+            desc = 'Toggle Task Checkbox',
+            icon = { color = 'green', icon = '' },
+          },
+          {
+            '<leader>vwd',
+            '<cmd>VimwikiDeleteFile<CR>',
+            desc = 'Delete Current Task File',
+            icon = { color = 'red', icon = '' },
+          },
+          {
+            '<leader>vwn',
+            '<cmd>VimwikiNextLink<CR>',
+            desc = 'Go to Next Task',
+            icon = { color = 'green', icon = '' },
+          },
+          {
+            '<leader>vwp',
+            '<cmd>VimwikiPrevLink<CR>',
+            desc = 'Go to Previous Task',
+            icon = { color = 'red', icon = '' },
+          },
+          {
+            '<leader>vwi',
+            '<cmd>VimwikiDiaryIndex<CR>',
+            desc = 'Open Diary Index',
+            icon = { color = 'orange', icon = '' },
+          },
+          {
+            '<leader>vww',
+            '<cmd>VimwikiMakeDiaryNote<CR>',
+            desc = 'Create Today\'s Task Note',
+            icon = { color = 'yellow', icon = '' },
+          },
+          {
+            '<leader>vwy',
+            '<cmd>VimwikiMakeYesterdayDiaryNote<CR>',
+            desc = 'Create Yesterday\'s Task Note',
+            icon = { color = 'purple', icon = '' },
+          },
+          {
+            '<leader>vwm',
+            '<cmd>VimwikiMakeTomorrowDiaryNote<CR>',
+            desc = 'Create Tomorrow\'s Task Note',
+            icon = { color = 'cyan', icon = '' },
+          },
+        })
+
+        -- }}}
+
+        -- TaskWarrior {{{
+
+        wk.add({
+          { '<leader>tw', group = 'TaskWarrior', icon = '' },
+          {
+            '<leader>twc',
+            '<cmd>TaskWikiToggleStatus<CR>',
+            desc = 'Toggle Task Status',
+            icon = { color = 'blue', icon = '' },
+          },
+          {
+            '<leader>twd',
+            '<cmd>TaskWikiDone<CR>',
+            desc = 'Mark Task as Done',
+            icon = { color = 'green', icon = '' },
+          },
+          {
+            '<leader>twa',
+            '<cmd>TaskWikiAdd<CR>',
+            desc = 'Add a New Task',
+            icon = { color = 'yellow', icon = '' },
+          },
+          {
+            '<leader>twd',
+            '<cmd>TaskWikiDelete<CR>',
+            desc = 'Delete Current Task',
+            icon = { color = 'red', icon = '' },
+          },
+          {
+            '<leader>twl',
+            '<cmd>TaskWikiList<CR>',
+            desc = 'Open Task List',
+            icon = { color = 'purple', icon = '' },
+          },
+          {
+            '<leader>twt',
+            '<cmd>TaskWikiToday<CR>',
+            desc = 'Open Today\'s Task',
+            icon = { color = 'orange', icon = '' },
+          },
+          {
+            '<leader>twv',
+            '<cmd>TaskWikiOverview<CR>',
+            desc = 'Open Task Overview',
+            icon = { color = 'cyan', icon = '' },
+          },
+          {
+            '<leader>twn',
+            '<cmd>TaskWikiNext<CR>',
+            desc = 'Go to Next Task',
+            icon = { color = 'green', icon = '' },
+          },
+          {
+            '<leader>twp',
+            '<cmd>TaskWikiPrev<CR>',
+            desc = 'Go to Previous Task',
+            icon = { color = 'red', icon = '' },
+          },
+        })
+
+        -- }}}
+      end,
+    })
+    -- }}}
   end,
 })
 
