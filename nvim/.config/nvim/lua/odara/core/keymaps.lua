@@ -181,10 +181,8 @@ vim.api.nvim_create_autocmd('User', {
 
 -- General Keymaps -------------------
 vim.keymap.set('i', 'jk', '<ESC>', { desc = 'Exit insert mode with jk' })
-vim.keymap.set('i', 'jjj', '<ESC>', { desc = 'Exit insert mode with jj' })
-vim.keymap.set('i', 'kkk', '<ESC>', { desc = 'Exit insert mode with kk' })
-vim.keymap.set('i', 'hhh', '<ESC>', { desc = 'Exit insert mode with hh' })
-vim.keymap.set('i', 'lll', '<ESC>', { desc = 'Exit insert mode with ll' })
+vim.keymap.set('i', 'jj', '<ESC>', { desc = 'Exit insert mode with jj' })
+vim.keymap.set('i', 'kk', '<ESC>', { desc = 'Exit insert mode with kk' })
 vim.keymap.set('i', ':w', '<ESC>:w<CR>', { desc = 'Exit insert and save' })
 vim.keymap.set('i', ':W', '<ESC>:w<CR>', { desc = 'Exit insert and save' })
 

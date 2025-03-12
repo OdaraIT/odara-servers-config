@@ -69,6 +69,7 @@ return {
         'c',
         'regex',
         'ini',
+        'php',
       },
 
       incremental_selection = {

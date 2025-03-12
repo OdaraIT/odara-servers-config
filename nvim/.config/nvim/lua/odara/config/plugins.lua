@@ -24,7 +24,7 @@ return {
   --  Auxilia no desenvolvimento com respostas inteligentes e contextuais.
   --  Configurável, com suporte a comandos personalizados e atalhos.
   --  Repositório: https://github.com/jackMort/ChatGPT.nvim
-  chatgpt_nvim = true,
+  chatgpt_nvim = false,
 
   -- NOTE:  Configuração avançada do GitHub Copilot para Neovim.
   --  Fornece controle granular sobre comportamento e atalhos do Copilot.
@@ -402,6 +402,13 @@ return {
   --  Configurável, com suporte a tabelas, listas e pré-visualização.
   --  Repositório: https://github.com/plasticboy/vim-markdown
   vim_markdown = true,
+
+  -- NOTE:  Plugin leve para alinhamento de texto no Neovim.
+  --  Permite alinhar rapidamente código, tabelas e listas por caracteres específicos.
+  --  Simples e eficiente, sem dependências externas.
+  --  Configurável, com suporte a alinhamento interativo e regras personalizadas.
+  --  Repositório: https://github.com/echasnovski/mini.align
+  mini_align = true,
 
   -- }}}
 
