@@ -73,12 +73,12 @@ return {
       enabled = vim.g.odara.plugins.lspkind_nvim,
     },
 
+    -- NOTE:  Integra o GitHub Copilot ao nvim-cmp.
+    --  Permite usar sugestões do Copilot como fonte de autocomplete.
+    --  Melhora a experiência de código com previsões mais naturais e fluídas.
+    --  Totalmente configurável, com suporte a prioridades e ajustes finos.
+    --  Repositório: https://github.com/zbirenbaum/copilot-cmp
     {
-      -- NOTE:  Integra o GitHub Copilot ao nvim-cmp.
-      --  Permite usar sugestões do Copilot como fonte de autocomplete.
-      --  Melhora a experiência de código com previsões mais naturais e fluídas.
-      --  Totalmente configurável, com suporte a prioridades e ajustes finos.
-      --  Repositório: https://github.com/zbirenbaum/copilot-cmp
       'zbirenbaum/copilot-cmp',
       enabled = vim.g.odara.plugins.copilot_cmp,
     },

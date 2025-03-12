@@ -62,7 +62,6 @@ return {
         systemd = { 'systemd_analyze' },
         php = { 'intelephense' },
         toml = { 'taplo' },
-        http = { 'jq' },
       },
 
       format_on_save = function(bufnr)

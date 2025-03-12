@@ -67,7 +67,7 @@ return {
   --   Integra-se com Treesitter, LSP e interfaces personalizadas.
   --   Permite execução assíncrona e exibição detalhada de resultados.
   --   Repositório: https://github.com/nvim-neotest/neotest
-  neotest = true,
+  neotest = false,
 
   -- NOTE:   Adaptador do Neotest para testes em Go.
   --   Permite executar, depurar e visualizar testes de Go diretamente no Neovim.
@@ -246,7 +246,7 @@ return {
   --  Suporte a histórico persistente utilizando sqlite.lua.
   --  Configuração flexível com filtros e ações personalizadas.
   --  Repositório: https://github.com/AckslD/nvim-neoclip.lua
-  nvim_neoclip_lua = true,
+  nvim_neoclip_lua = false,
 
   -- }}}
 
@@ -321,7 +321,7 @@ return {
   --  Permite navegar entre tabelas, visualizar esquemas e executar queries.
   --  Requer vim-dadbod como dependência.
   --  Repositório: https://github.com/kristijanhusak/vim-dadbod-ui
-  vim_dadbod_ui = true,
+  vim_dadbod_ui = false,
 
   -- }}}
 
@@ -332,14 +332,14 @@ return {
   --  Permite adicionar breakpoints, inspecionar variáveis e controlar a execução do código.
   --  Altamente configurável e extensível com integrações como nvim-dap-ui.
   --  Repositório: https://github.com/mfussenegger/nvim-dap
-  nvim_dap = true,
+  nvim_dap = false,
 
   -- NOTE:  Suporte para depuração de Go no Neovim com nvim-dap.
   --  Configura automaticamente o adaptador DAP para Go (delve).
   --  Permite adicionar breakpoints, inspecionar variáveis e controlar a execução.
   --  Requer nvim-dap e Delve (dlv) instalado no sistema.
   --  Repositório: https://github.com/leoluz/nvim-dap-go
-  nvim_dap_go = true,
+  nvim_dap_go = false,
 
   -- }}}
 
@@ -443,7 +443,7 @@ return {
   --   Suporte a seleções contextuais em funções, argumentos, blocos e mais.
   --   Leve, sem dependências e altamente configurável via Lua.
   --   Repositório: https://github.com/echasnovski/mini.ai
-  mini_ai = true,
+  mini_ai = false,
 
   -- }}}
 
@@ -557,7 +557,7 @@ return {
   --  Suporte a listas de permissões e confirmações para segurança.
   --  Útil para projetos que exigem configurações específicas sem poluir a config global.
   --  Repositório: https://github.com/klen/nvim-config-local
-  nvim_config_local = true,
+  nvim_config_local = false,
 
   -- NOTE:  Biblioteca de Promises assíncronas para Neovim em Lua.
   --  Utilizada para facilitar operações assíncronas sem callbacks aninhados.
@@ -627,7 +627,7 @@ return {
   --  Integração fluida com auto-session e atalhos personalizáveis.
   --  Leve, eficiente e fácil de configurar.
   --  Repositório: https://github.com/rmagatti/session-lens
-  session_lens = true,
+  session_lens = false,
 
   -- }}}
 
@@ -638,21 +638,21 @@ return {
   --  Integra-se com nvim-cmp para autocompletar snippets.
   --  Totalmente configurável, permitindo criação e personalização de snippets.
   --  Repositório: https://github.com/L3MON4D3/LuaSnip
-  luasnip = true,
+  luasnip = false,
 
   -- NOTE:  Coleção de snippets pré-definidos para diversas linguagens no Neovim.
   --  Compatível com LuaSnip, snippy e outros sistemas de snippets.
   --  Inclui atalhos para frameworks e bibliotecas populares.
   --  Fácil de expandir e personalizar conforme necessário.
   --  Repositório: https://github.com/rafamadriz/friendly-snippets
-  friendly_snippets = true,
+  friendly_snippets = false,
 
   -- NOTE:   Plugin para desenvolvimento em Go no Neovim.
   --   Suporte a formatação, linting, execução e depuração de código Go.
   --   Integra-se com LSP, Treesitter, DAP e ferramentas como `gopls` e `dlv`.
   --   Comandos para testar, compilar e navegar pelo código de forma eficiente.
   --   Repositório: https://github.com/ray-x/go.nvim
-  snippets_go_nvim = true,
+  snippets_go_nvim = false,
 
   -- }}}
 
@@ -663,14 +663,14 @@ return {
   --  Facilita a organização de notas, documentos e planejamento de projetos.
   --  Altamente configurável, com opções de sincronização e exportação.
   --  Repositório: https://github.com/vimwiki/vimwiki
-  vimwiki = true,
+  vimwiki = false,
 
   -- NOTE:  Integra o Taskwarrior ao VimWiki no Neovim.
   --  Permite gerenciar tarefas diretamente dentro de páginas do VimWiki.
   --  Facilita o acompanhamento de prazos, prioridades e projetos.
   --  Configurável, com suporte a filtros, comandos personalizados e sincronização.
   --  Repositório: https://github.com/tbabej/taskwiki
-  taskwiki = true,
+  taskwiki = false,
 
   -- NOTE:   Gerenciador de tarefas assíncronas para Neovim.
   --   Executa, monitora e gerencia comandos e processos dentro do editor.

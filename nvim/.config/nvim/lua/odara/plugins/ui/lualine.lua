@@ -60,7 +60,9 @@ return {
     local lualine = require('lualine')
     local lazy_status = require('lazy.status')
     local setup = {}
-    local lazy_status_color = '#ff9e64'
+    local plugins_updates_color = '#ff9e64'
+
+    -- Tokio Night theme {{{
 
     if vim.g.odara.plugins.tokyonight_nvim then
       local colors = {
@@ -117,8 +119,10 @@ return {
       }
     end
 
+    -- }}}
+
     if vim.g.odara.plugins.catppuccin_nvim then
-      lazy_status_color = '#fab387'
+      plugins_updates_color = '#fab387'
     end
 
     local noice = require('noice')
@@ -136,7 +140,22 @@ return {
         {
           lazy_status.updates,
           cond = lazy_status.has_updates,
-          color = { fg = lazy_status_color },
+          color = { fg = plugins_updates_color },
+        },
+        {
+          function()
+            local updates = vim.fn.systemlist('mason --outdated')
+
+            if #updates > 0 then
+              return '󰇚 ' .. #updates
+            end
+
+            return ''
+          end,
+          cond = function()
+            return vim.fn.executable('mason') == 1
+          end,
+          color = { fg = plugins_updates_color },
         },
         {
           'copilot',

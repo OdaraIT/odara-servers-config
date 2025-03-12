@@ -6,9 +6,7 @@ return {
   --  Repositório: https://github.com/nvim-tree/nvim-tree.lua
   'nvim-tree/nvim-tree.lua',
 
-  enabled = vim.g.odara.plugins.nvim_tree_lua
-    and vim.g.odara.plugins.nvim_config_local
-    and vim.g.odara.plugins.nvim_web_devicons,
+  enabled = vim.g.odara.plugins.nvim_tree_lua and vim.g.odara.plugins.nvim_web_devicons,
 
   dependencies = {
     -- NOTE:  Plugin para carregar configurações locais no Neovim.
@@ -18,7 +16,7 @@ return {
     --  Repositório: https://github.com/klen/nvim-config-local
     {
       'klen/nvim-config-local',
-      enabled = true,
+      enabled = vim.g.odara.plugins.nvim_config_local,
     },
 
     -- NOTE:  Ícones para arquivos e diretórios no Neovim.

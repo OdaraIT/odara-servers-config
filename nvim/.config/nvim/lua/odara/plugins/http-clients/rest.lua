@@ -8,6 +8,8 @@ return {
 
   enabled = vim.g.odara.plugins.rest_nvim and vim.g.odara.plugins.plenary_nvim,
 
+  -- dependencies {{{
+
   dependencies = {
     -- NOTE:  Biblioteca auxiliar com funções utilitárias para desenvolvimento em Lua no Neovim.
     --  Fornece manipulação de arquivos, async, paths, jobs e mais.
@@ -39,6 +41,8 @@ return {
       enabled = vim.g.odara.plugins.telescope_nvim,
     },
   },
+
+  -- }}}
 
   ft = { 'http' },
 
