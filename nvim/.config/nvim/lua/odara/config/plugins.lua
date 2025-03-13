@@ -332,14 +332,14 @@ return {
   --  Permite adicionar breakpoints, inspecionar variáveis e controlar a execução do código.
   --  Altamente configurável e extensível com integrações como nvim-dap-ui.
   --  Repositório: https://github.com/mfussenegger/nvim-dap
-  nvim_dap = false,
+  nvim_dap = true,
 
   -- NOTE:  Suporte para depuração de Go no Neovim com nvim-dap.
   --  Configura automaticamente o adaptador DAP para Go (delve).
   --  Permite adicionar breakpoints, inspecionar variáveis e controlar a execução.
   --  Requer nvim-dap e Delve (dlv) instalado no sistema.
   --  Repositório: https://github.com/leoluz/nvim-dap-go
-  nvim_dap_go = false,
+  nvim_dap_go = true,
 
   -- }}}
 
