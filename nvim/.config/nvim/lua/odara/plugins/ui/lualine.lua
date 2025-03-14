@@ -172,6 +172,23 @@ return {
           },
           show_colors = true,
         },
+        {
+          '',
+          color = function()
+            if not vim.g.odara.plugins.nvim_dap then
+              return { fg = '#98C379' }
+            end
+
+            if require('dap').session() then
+              return { fg = '#98C379' }
+            else
+              return { fg = '#5C6370' }
+            end
+          end,
+          cond = function()
+            return true
+          end,
+        },
         'encoding',
         'fileformat',
         {

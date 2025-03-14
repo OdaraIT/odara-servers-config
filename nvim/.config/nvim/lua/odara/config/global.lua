@@ -31,6 +31,30 @@ return {
   skip_none_ls = false,
   has_nerd_font = true,
 
+  languages = {
+    go = {
+      enabled = true,
+      delve = true,
+    },
+
+    php = {
+      enabled = true,
+      xdebug = true,
+      intelephense = true,
+      phpstan = false,
+      phpcs = false,
+      phpmd = false,
+    },
+  },
+
+  lsp = {
+    skip = false,
+  },
+
+  dap = {
+    skip = false,
+  },
+
   linters = {
     enable_phpstan = false,
     enable_phpcs = false,

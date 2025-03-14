@@ -54,7 +54,17 @@ return {
     --  Repositório: https://github.com/nvim-tree/nvim-web-devicons
     {
       'nvim-tree/nvim-web-devicons',
-      enabled = vim.g.odara.plugins.nvim_web_devicons or false,
+      enabled = vim.g.odara.plugins.nvim_web_devicons,
+    },
+
+    -- NOTE:  Integração do DAP (Debug Adapter Protocol) com Telescope.
+    --  Facilita a navegação por breakpoints, frames, threads e variáveis.
+    --  Melhora o fluxo de depuração com buscas rápidas e eficientes.
+    --  Configurável, suportando filtros e atalhos personalizados.
+    --  Repositório: https://github.com/nvim-telescope/telescope-dap.nvim
+    {
+      'nvim-telescope/telescope-dap.nvim',
+      enabled = vim.g.odara.plugins.telescope_dap_nvim,
     },
 
     -- NOTE: Extensão do Telescope para integração com o LuaSnip no Neovim.

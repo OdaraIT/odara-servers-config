@@ -334,6 +334,29 @@ return {
   --  Repositório: https://github.com/mfussenegger/nvim-dap
   nvim_dap = true,
 
+  -- NOTE:  Interface gráfica para nvim-dap no Neovim.
+  --  Exibe variáveis, breakpoints, pilha de chamadas e consoles de depuração.
+  --  Facilita a interação com o depurador através de janelas flutuantes e painéis.
+  --  Requer nvim-dap para funcionar corretamente.
+  --  Repositório: https://github.com/rcarriga/nvim-dap-ui
+  nvim_dap_ui = true,
+
+  -- NOTE:  Exibe variáveis e expressões diretamente no código durante a depuração.
+  --  Integração com nvim-dap para mostrar valores inline.
+  --  Atualização em tempo real conforme a execução do código avança.
+  --  Requer nvim-dap e nvim-treesitter para funcionar corretamente.
+  --  Repositório: https://github.com/theHamsta/nvim-dap-virtual-text
+  nvim_dap_virtual_text = true,
+
+  -- NOTE:  Integração entre Mason e nvim-dap no Neovim.
+  --  Gerencia automaticamente depuradores para diversas linguagens.
+  --  Instala e configura adaptadores DAP via Mason.
+  --  Facilita a configuração do nvim-dap sem precisar instalar manualmente os adaptadores.
+  --  Repositório: https://github.com/jay-babu/mason-nvim-dap.nvim
+  mason_nvim_dap_nvim = true,
+
+  -- Languages {{{
+
   -- NOTE:  Suporte para depuração de Go no Neovim com nvim-dap.
   --  Configura automaticamente o adaptador DAP para Go (delve).
   --  Permite adicionar breakpoints, inspecionar variáveis e controlar a execução.
@@ -341,6 +364,7 @@ return {
   --  Repositório: https://github.com/leoluz/nvim-dap-go
   nvim_dap_go = true,
 
+  -- }}}
   -- }}}
 
   -- Development {{{
@@ -519,6 +543,13 @@ return {
   -- Repositório: https://github.com/benfowler/telescope-luasnip.nvim
   telescope_luasnip_nvim = true,
 
+  -- NOTE:  Integração do DAP (Debug Adapter Protocol) com Telescope.
+  --  Facilita a navegação por breakpoints, frames, threads e variáveis.
+  --  Melhora o fluxo de depuração com buscas rápidas e eficientes.
+  --  Configurável, suportando filtros e atalhos personalizados.
+  --  Repositório: https://github.com/nvim-telescope/telescope-dap.nvim
+  telescope_dap_nvim = true,
+
   -- }}}
 
   -- GIT {{{
@@ -572,6 +603,13 @@ return {
   --  Dependência essencial para plugins como nvim-ufo.
   --  Repositório: https://github.com/kevinhwang91/promise-async
   promise_async = true,
+
+  -- NOTE:  Biblioteca assíncrona para Neovim em Lua.
+  --  Fornece uma API para manipulação de eventos assíncronos e IO.
+  --  Utilizada internamente por plugins como neotest.
+  --  Ajuda no desenvolvimento de plugins com melhor gerenciamento de concorrência.
+  --  Repositório: https://github.com/nvim-neotest/nvim-nio
+  nvim_nio = true,
 
   -- }}}
 

@@ -6,7 +6,13 @@ return {
   --  Repositório: https://github.com/mfussenegger/nvim-dap
   'mfussenegger/nvim-dap',
 
-  enabled = vim.g.odara.plugins.mason_nvim and vim.g.odara.plugins.nvim_dap,
+  enabled = vim.g.odara.plugins.nvim_dap
+    and vim.g.odara.plugins.nvim_dap_ui
+    and vim.g.odara.plugins.nvim_nio
+    and vim.g.odara.plugins.nvim_dap_virtual_text
+    and vim.g.odara.plugins.telescope_dap_nvim
+    and vim.g.odara.plugins.mason_nvim
+    and vim.g.odara.plugins.mason_nvim_dap_nvim,
 
   -- Dependencies {{{
 
@@ -60,6 +66,15 @@ return {
       enabled = true,
     },
 
+    -- NOTE:  Integração do DAP (Debug Adapter Protocol) com Telescope.
+    --  Facilita a navegação por breakpoints, frames, threads e variáveis.
+    --  Melhora o fluxo de depuração com buscas rápidas e eficientes.
+    --  Configurável, suportando filtros e atalhos personalizados.
+    --  Repositório: https://github.com/nvim-telescope/telescope-dap.nvim
+    {
+      'nvim-telescope/telescope-dap.nvim',
+      enabled = true,
+    },
     -- NOTE:  Suporte para depuração de Go no Neovim com nvim-dap.
     --  Configura automaticamente o adaptador DAP para Go (delve).
     --  Permite adicionar breakpoints, inspecionar variáveis e controlar a execução.
@@ -68,62 +83,7 @@ return {
     {
       'leoluz/nvim-dap-go',
       enabled = vim.g.odara.plugins.nvim_dap_go,
-    },
-  },
-
-  -- }}}
-
-  -- Keybindings {{{
-
-  keys = {
-    {
-      '<F5>',
-      function()
-        require('dap').continue()
-      end,
-      desc = 'Debug: Start/Continue',
-    },
-    {
-      '<F1>',
-      function()
-        require('dap').step_into()
-      end,
-      desc = 'Debug: Step Into',
-    },
-    {
-      '<F2>',
-      function()
-        require('dap').step_over()
-      end,
-      desc = 'Debug: Step Over',
-    },
-    {
-      '<F3>',
-      function()
-        require('dap').step_out()
-      end,
-      desc = 'Debug: Step Out',
-    },
-    {
-      '<leader>b',
-      function()
-        require('dap').toggle_breakpoint()
-      end,
-      desc = 'Debug: Toggle Breakpoint',
-    },
-    {
-      '<leader>B',
-      function()
-        require('dap').set_breakpoint(vim.fn.input('Breakpoint condition: '))
-      end,
-      desc = 'Debug: Set Breakpoint',
-    },
-    {
-      '<F7>',
-      function()
-        require('dapui').toggle()
-      end,
-      desc = 'Debug: See last session result.',
+      cond = vim.g.odara.global.languages.go.enabled and vim.g.odara.global.languages.go.delve,
     },
   },
 
@@ -135,6 +95,8 @@ return {
     local dap = require('dap')
     local dapui = require('dapui')
     local mason = require('mason-nvim-dap')
+
+    require('telescope').load_extension('dap')
 
     -- DAP {{{
 
@@ -186,6 +148,129 @@ return {
       },
     })
 
+    -- }}}
+
+    -- Keybindings {{{
+    local wk = require('which-key')
+    local dap_telescope = require('telescope').extensions.dap
+
+    wk.add({
+      { '<leader>d', group = 'Debugging (DAP)', icon = '' },
+
+      -- Execução e Controle do Debugger
+      {
+        '<F5>',
+        dap.continue,
+        desc = 'Debug: Start/Continue',
+        icon = { color = 'blue', icon = '' },
+      },
+      {
+        '<F1>',
+        dap.step_into,
+        desc = 'Debug: Step Into',
+        icon = { color = 'yellow', icon = '󰆹' },
+      },
+      {
+        '<F2>',
+        dap.step_over,
+        desc = 'Debug: Step Over',
+        icon = { color = 'yellow', icon = '' },
+      },
+      {
+        '<F3>',
+        dap.step_out,
+        desc = 'Debug: Step Out',
+        icon = { color = 'yellow', icon = '󰆸' },
+      },
+      {
+        '<F4>',
+        dap.terminate,
+        desc = 'Debug: Stop Debugging',
+        icon = { color = 'red', icon = '󰅖' },
+      },
+
+      -- UI do Debugger
+      {
+        '<F7>',
+        dapui.toggle,
+        desc = 'Debug: Toggle UI',
+        icon = { color = 'blue', icon = '󰍰' },
+      },
+      {
+        '<F8>',
+        dapui.eval,
+        desc = 'Debug: Evaluate Expression',
+        icon = { color = 'cyan', icon = '' },
+      },
+
+      -- Breakpoints e Configuração
+      {
+        '<leader>db',
+        dap.toggle_breakpoint,
+        desc = '[D]ebug: Toggle [B]reakpoint',
+        icon = { color = 'red', icon = '' },
+      },
+      {
+        '<leader>dB',
+        function()
+          dap.set_breakpoint(vim.fn.input('Breakpoint condition: '))
+        end,
+        desc = '[D]ebug: Set Conditional [B]reakpoint',
+        icon = { color = 'red', icon = '󰿁' },
+      },
+
+      -- Controle da Sessão de Debugging
+      {
+        '<leader>dr',
+        dap.restart,
+        desc = '[D]ebug: [R]estart',
+        icon = { color = 'orange', icon = '󰜉' },
+      },
+      {
+        '<leader>dq',
+        dap.terminate,
+        desc = '[D]ebug: [Q]uit',
+        icon = { color = 'red', icon = '󰅖' },
+      },
+      {
+        '<leader>de',
+        dapui.eval,
+        desc = '[D]ebug: [E]valuate Expression',
+        icon = { color = 'cyan', icon = '' },
+      },
+      {
+        '<leader>du',
+        dapui.toggle,
+        desc = '[D]ebug: Toggle [U]I',
+        icon = { color = 'blue', icon = '󰍰' },
+      },
+
+      -- 🔍 Integração com Telescope
+      {
+        '<leader>ds',
+        dap_telescope.commands,
+        desc = '[D]ebug: [S]how Available Commands',
+        icon = { color = 'cyan', icon = '' },
+      },
+      {
+        '<leader>dl',
+        dap_telescope.list_breakpoints,
+        desc = '[D]ebug: [L]ist Breakpoints',
+        icon = { color = 'yellow', icon = '󰯆' },
+      },
+      {
+        '<leader>dv',
+        dap_telescope.variables,
+        desc = '[D]ebug: Show [V]ariables',
+        icon = { color = 'blue', icon = '' },
+      },
+      {
+        '<leader>df',
+        dap_telescope.frames,
+        desc = '[D]ebug: Show Stack [F]rames',
+        icon = { color = 'purple', icon = '󰫑' },
+      },
+    })
     -- }}}
   end,
 
